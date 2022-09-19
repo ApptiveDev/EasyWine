@@ -1,11 +1,31 @@
 package com.apptive
 
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.apptive.easywine.presentation.navgation.Screen
+import com.apptive.easywine.presentation.navgation.easyWineGraph
 import com.apptive.easywine.ui.theme.EasyWineTheme
 
 @Composable
 fun EasyWineApp() {
 	EasyWineTheme {
-		// TODO - make NavGraph
+		Scaffold(
+			scaffoldState = rememberScaffoldState(),
+			bottomBar = {}
+		) {
+			var navController = rememberNavController()
+			NavHost(
+				navController = navController,
+				startDestination = Screen.HomeScreen.route
+			) {
+				easyWineGraph(
+					navController = navController
+				)
+			}
+			it
+		}
 	}
 }
