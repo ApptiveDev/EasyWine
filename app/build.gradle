@@ -68,4 +68,13 @@ dependencies {
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
     implementation "androidx.compose.ui:ui-util:$compose_version"
+
+
+    // accompanist
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.17.0"
+    implementation "com.google.accompanist:accompanist-pager:0.24.13-rc"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.24.13-rc"
+
+    // Coil - Image Loading
+    implementation "io.coil-kt:coil-compose:2.1.0"
 }
