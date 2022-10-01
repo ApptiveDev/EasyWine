@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import coil.compose.AsyncImage
-import coil.request.ImageRequest
+import com.android.volley.toolbox.ImageRequest
 import com.apptive.easywine.R
 import com.apptive.easywine.presentation.components.TextTopBar
 import com.apptive.easywine.ui.theme.gray_button
@@ -141,7 +141,7 @@ private fun BoxScope.WineBannerPager(
 				.fillMaxWidth()
 		) { page ->
 			AsyncImage(
-				model = ImageRequest.Builder(LocalContext.current)
+				model = coil.request.ImageRequest.Builder(LocalContext.current)
 					.data(images[page])
 					.crossfade(true)
 					.build(),
