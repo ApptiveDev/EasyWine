@@ -8,5 +8,5 @@ import com.apptive.easywine.presentation.viewmodel.interfaces.IDegreeViewModel
 
 class DegreeViewModel: ViewModel(),
     IDegreeViewModel{
-    override var toDegree: MutableState<Degree> = mutableStateOf(Degree.dg1)
+    override var toDegree: MutableState<Degree> = mutableStateOf(Degree.DG_NONE)
         }
