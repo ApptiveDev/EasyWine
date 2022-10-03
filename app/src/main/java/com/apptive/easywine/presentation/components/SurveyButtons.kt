@@ -27,42 +27,41 @@ fun ResultButton(
 	color: Color,
 	onClick: () -> Unit = {},
 ) {
-	val shape =
-		Button(
-			onClick = onClick,
-			colors = ButtonDefaults.buttonColors(
-				backgroundColor = gray_button_before
-			),
-			modifier = Modifier
-				.width(280.dp)
-				.height(60.dp),
-			shape = RoundedCornerShape(70.dp)
+	Button(
+		onClick = onClick,
+		colors = ButtonDefaults.buttonColors(
+			backgroundColor = gray_button_before
+		),
+		modifier = Modifier
+			.width(280.dp)
+			.height(60.dp),
+		shape = RoundedCornerShape(70.dp)
 
-		) {
-			Box(
-				modifier = Modifier
-					.width(266.dp)
-					.height(50.dp)
-					.border(
-						width = 1.dp,
-						color = Color.White,
-						shape = RoundedCornerShape(70.dp)
-					)
-			) {
-				Text(
-					text = text,
+	) {
+		Box(
+			modifier = Modifier
+				.width(266.dp)
+				.height(50.dp)
+				.border(
+					width = 1.dp,
 					color = Color.White,
-					fontSize = 16.sp,
-					fontWeight = FontWeight.ExtraBold,
-					modifier = Modifier
-						.align(Alignment.Center)
+					shape = RoundedCornerShape(70.dp)
 				)
-			}
+		) {
+			Text(
+				text = text,
+				color = Color.White,
+				fontSize = 16.sp,
+				fontWeight = FontWeight.ExtraBold,
+				modifier = Modifier
+					.align(Alignment.Center)
+			)
 		}
+	}
 }
 
 @Composable
-fun PageNavText(
+fun PageNav(
 	onClick: () -> Unit = {},
 	isLeft: Boolean = true
 ) {
@@ -73,24 +72,33 @@ fun PageNavText(
 		)
 	) {
 		Row() {
+			if (!isLeft) PageNavText("다음으로 넘어가기")
+
 			Image(
 				painterResource(
-					id = if (isLeft) R.drawable.page_previous else R.drawable.page_previous
+					id = if (isLeft) R.drawable.page_previous else R.drawable.page_next
 				),
 				contentDescription = "page nav button",
 				modifier = Modifier
 					.height(22.dp)
 					.width(22.dp)
 			)
-			Text(
-				text = if (isLeft) "이전으로 돌아가기" else "다음으로 넘어가기",
-				color = gray_button_before,
-				fontSize = 15.sp
-			)
+
+			if (isLeft) PageNavText("이전으로 돌아가기")
 		}
 	}
 }
 
+@Composable
+fun PageNavText(
+	text: String
+) {
+	Text(
+		text = text,
+		color = gray_button_before,
+		fontSize = 15.sp
+	)
+}
 
 @Preview
 @Composable
@@ -104,7 +112,7 @@ fun PreviewResultButton() {
 			text = "오늘의 와인 확인하기",
 			color = wine_button
 		)
-		PageNavText(isLeft = true)
-		PageNavText(isLeft = false)
+		PageNav(isLeft = true)
+		PageNav(isLeft = false)
 	}
 }
