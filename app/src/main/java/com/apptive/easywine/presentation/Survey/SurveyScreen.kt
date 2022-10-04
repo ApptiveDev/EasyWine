@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.apptive.easywine.R
 import com.apptive.easywine.presentation.components.*
+import com.apptive.easywine.ui.theme.gray_button_before
 
 @Preview
 @Composable
@@ -81,12 +82,15 @@ fun SurveyScreen(){
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Row() {
-                    PreviousPage()
+                Row {
+                    PageNav(isLeft = true)
                     Spacer(modifier = Modifier.size(30.dp))
-                    NextPage()
+                    PageNav(isLeft = false)
                 }
-                BeforeResultButton()
+                ResultButton(
+                    text = "오늘의 와인 확인하기",
+                    color = gray_button_before
+                )
             }
 
         }
