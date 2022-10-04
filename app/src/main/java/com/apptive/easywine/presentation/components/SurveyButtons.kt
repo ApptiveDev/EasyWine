@@ -32,36 +32,36 @@ import androidx.compose.ui.graphics.Color as Color
 @Composable
 fun BeforeResultButton(){
     val shape = RoundedCornerShape(70.dp)
-        Button(
-            onClick = { /*TODO*/ },
-            shape = shape,
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = gray_button_before
-            ),
+    Button(
+        onClick = { /*TODO*/ },
+        shape = shape,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = gray_button_before
+        ),
+        modifier = Modifier
+            .width(280.dp)
+            .height(60.dp)
+    ){
+        Box(
             modifier = Modifier
-                .width(280.dp)
-                .height(60.dp)
-        ){
-            Box(
-                modifier = Modifier
-                    .width(266.dp)
-                    .height(50.dp)
-                    .border(
-                        width = 1.dp,
-                        color = Color.White,
-                        shape = shape
-                    )
-            ){
-                Text(
-                    text = "오늘의 와인 확인하기",
+                .width(266.dp)
+                .height(50.dp)
+                .border(
+                    width = 1.dp,
                     color = Color.White,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    modifier = Modifier
-                        .align(Alignment.Center)
+                    shape = shape
                 )
-            }
+        ){
+            Text(
+                text = "오늘의 와인 확인하기",
+                color = Color.White,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.ExtraBold,
+                modifier = Modifier
+                    .align(Alignment.Center)
+            )
         }
+    }
 }
 
 @Composable
@@ -106,7 +106,6 @@ fun AfterResultButton(){
 fun PreviousPage(){
         Button(
             onClick = { /*TODO*/ },
-
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color.Transparent
             )
