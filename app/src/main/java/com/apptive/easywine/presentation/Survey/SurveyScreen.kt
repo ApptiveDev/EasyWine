@@ -8,6 +8,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,7 +21,7 @@ import com.apptive.easywine.R
 import com.apptive.easywine.presentation.components.*
 import com.apptive.easywine.ui.theme.gray_button_before
 
-@Preview
+
 @Composable
 fun SurveyScreen(){
     val scrollState = rememberScrollState()
@@ -34,41 +36,39 @@ fun SurveyScreen(){
 
             TextTopBar(title = "오늘의 와인 추천")
 
-            Button(
+            IconButton(
                 onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Transparent),
-                contentPadding = PaddingValues(0.dp),
                 modifier = Modifier
-                    .height(60.dp)
-                    .width(60.dp)
+                    .height(50.dp)
+                    .width(50.dp)
                     .align(Alignment.TopStart)
-            ){
-                Image(
+                    .offset(x=15.dp, y=15.dp)
+            ) {
+                Icon(
                     painterResource(id = R.drawable.survey_arrow),
                     contentDescription = "previous page button",
                     modifier = Modifier
-                        .width(40.dp)
-                        .height(45.dp)
+                        .width(42.dp)
+                        .height(48.dp),
+                    tint = Color.White
                 )
             }
 
-            Button(
+            IconButton(
                 onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Transparent),
-                contentPadding = PaddingValues(0.dp),
                 modifier = Modifier
-                    .height(60.dp)
-                    .width(60.dp)
+                    .height(50.dp)
+                    .width(50.dp)
                     .align(Alignment.TopEnd)
+                    .offset(x=-15.dp, y=15.dp)
             ){
-                Image(
+                Icon(
                     painterResource(id = R.drawable.survey_menu),
                     contentDescription = "menu page button",
                     modifier = Modifier
                         .width(24.dp)
-                        .height(24.dp)
+                        .height(24.dp),
+                    tint = Color.White
                 )
             }
 
