@@ -65,18 +65,22 @@ fun SurveyCategory(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (state == "done") {
-            SurveyCategoryCircle(number = number, color = wine_main, state = state)
-            Spacer(modifier = Modifier.size(4.dp))
-            SurveyCategoryText(firstLine = textKor, secondLine = textEng, firstColor = gray_text, secondColor = gray_button_before)
-        } else if (state == "now") {
-            SurveyCategoryCircle(number = number, color = wine_button, state = state)
-            Spacer(modifier = Modifier.size(4.dp))
-            SurveyCategoryText(firstLine = textKor, secondLine = textEng, firstColor = wine_main, secondColor = wine_main)
-        } else {
-            SurveyCategoryCircle(number = number, color = gray_button_before, state = state)
-            Spacer(modifier = Modifier.size(4.dp))
-            SurveyCategoryText(firstLine = textKor, secondLine = textEng, firstColor = gray_button_before, secondColor = gray_button_before)
+        when (state){
+            "done" -> {
+                SurveyCategoryCircle(number = number, color = wine_main, state = state)
+                Spacer(modifier = Modifier.size(4.dp))
+                SurveyCategoryText(firstLine = textKor, secondLine = textEng, firstColor = gray_text, secondColor = gray_button_before)
+            }
+            "now" -> {
+                SurveyCategoryCircle(number = number, color = wine_button, state = state)
+                Spacer(modifier = Modifier.size(4.dp))
+                SurveyCategoryText(firstLine = textKor, secondLine = textEng, firstColor = wine_main, secondColor = wine_main)
+            }
+            "yet" -> {
+                SurveyCategoryCircle(number = number, color = gray_button_before, state = state)
+                Spacer(modifier = Modifier.size(4.dp))
+                SurveyCategoryText(firstLine = textKor, secondLine = textEng, firstColor = gray_button_before, secondColor = gray_button_before)
+            }
         }
     }
 
