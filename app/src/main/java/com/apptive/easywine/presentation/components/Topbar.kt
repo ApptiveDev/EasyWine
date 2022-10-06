@@ -43,13 +43,14 @@ fun TopBar(
 @Composable
 fun TextTopBar(
 	title: String,
+	fontSize: Int,
 	color: Color = Color.White
 ) {
 	TopBar {
 		Text(
 			text = title,
 			fontFamily = FontFamily.SansSerif,
-			fontSize = 27.sp,
+			fontSize = fontSize.sp,
 			fontWeight = FontWeight(824),
 			color = color,
 			modifier = Modifier
@@ -59,12 +60,13 @@ fun TextTopBar(
 	}
 }
 
+
 @Preview
 @Composable
 fun PreviewTopBar() {
 	Column {
 		TopBar()
-		TextTopBar(title = "EASY WINE")
+		TextTopBar(title = "EASY WINE",27)
 	}
 	
 }

@@ -14,17 +14,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.apptive.easywine.R
 import com.apptive.easywine.ui.theme.*
-
 
 @Composable
 fun SurveyProgressBar(prog_percent : Float){
@@ -172,8 +175,8 @@ fun SurveyLine(
 ){
     Canvas(
         modifier = Modifier
-        .width(24.dp)
-        .height(24.dp)
+            .width(24.dp)
+            .height(24.dp)
     ){
         val canvasWidth = size.width
         drawLine(
@@ -185,19 +188,56 @@ fun SurveyLine(
     }
 }
 
-@Preview
 @Composable
-fun PreviewSurveyTopbar(){
-    Column (
-    ){
+fun BottomShadow(
+    alpha: Int = 255,
+    height: Dp = 8.dp
+) {
+    Box(
+        modifier = Modifier
+        .fillMaxWidth()
+        .height(height)
+        .background(
+            brush = Brush.verticalGradient(
+                colors = listOf(
+                    gray_shadow,
+                    Color.Transparent
+                )
+            )
+        )
+    )
+}
+
+@Composable
+fun SurveyTopbar() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentSize(Alignment.Center),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Spacer(modifier = Modifier.height(20.dp) )
         SurveyProgressBar(prog_percent = 0.7f)
-        Row (verticalAlignment = Alignment.CenterVertically) {
+        Spacer(modifier = Modifier.height(30.dp))
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             SurveyCategory(number = 1, state = "done", textKor = "맛", textEng = "flavor")
             SurveyLine(color = wine_main)
             SurveyCategory(number = 2, state = "now", textKor = "바디감", textEng = "body")
             SurveyLine(color = gray_button_before)
             SurveyCategory(number = 3, state = "yet", textKor = "상황", textEng = "mood")
         }
+        Spacer(modifier = Modifier.height(25.dp))
+        BottomShadow(alpha = 255, height = 8.dp)
+    }
+}
+
+@Preview
+@Composable
+fun PreviewSurveyTopbar(){
+    Column {
+        SurveyTopbar()
     }
 }
 

@@ -21,13 +21,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.apptive.easywine.R
 import com.apptive.easywine.enums.Degree
+import com.apptive.easywine.ui.theme.check_button
+import com.apptive.easywine.ui.theme.uncheck_button
 
 @Composable
 fun SurveyQuestion() {
 	Column(
 		modifier = Modifier
 			.fillMaxWidth()
-			.background(Color.White) // 추후 삭제
+//			.background(Color.White) // 추후 삭제
 			.padding(vertical = 20.dp)
 			.padding(horizontal = 23.dp)
 			.wrapContentSize(Alignment.Center),
@@ -95,7 +97,7 @@ private fun RadioContainer(
 						id = if (selectedValue.value == label) R.drawable.check_circle_kit else R.drawable.uncheck
 					),
 					contentDescription = null,
-//					tint = if (selectedValue.value == label) Color(0xFFD65261) else Color(0xFF929292),
+					tint = if (selectedValue.value == label) check_button else uncheck_button,
 					modifier = Modifier
 						.size(label.radioSize)
 						.selectable(

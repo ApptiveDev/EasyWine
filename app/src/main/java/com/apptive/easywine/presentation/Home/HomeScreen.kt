@@ -45,7 +45,7 @@ fun HomeScreen() {
 			.fillMaxSize()
 			.verticalScroll(scrollState)
 	) {
-		TextTopBar(title = "EASY WINE")
+		TextTopBar(title = "EASY WINE",27)
 		WavyLines()
 		HomeMainBanner()
 
