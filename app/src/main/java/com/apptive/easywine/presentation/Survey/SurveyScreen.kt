@@ -28,13 +28,9 @@ fun SurveyScreen(){
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .background(Color.White)
-            //.fillMaxSize()
-            //.verticalScroll(scrollState)
     ){
-        TextTopBar(title = "오늘의 와인 추천",18)
+        SnackTopBar(title = "오늘의 와인 추천",18)
         SurveyTopbar()
-        Spacer(modifier = Modifier.height(30.dp))
-        SurveyTitle("오늘의 와인을 위한 ","바디감 ","질문이에요.")
         Spacer(modifier = Modifier.height(30.dp))
         SurveyMainContent()
     }
@@ -45,7 +41,13 @@ fun SurveyScreen(){
 fun SurveyMainContent() {
     val scrollState = rememberScrollState()
     Column(){
-        LazyColumn() {
+        LazyColumn(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item{
+                SurveyTitle("오늘의 와인을 위한 ","바디감 ","질문이에요.")
+                Spacer(modifier = Modifier.height(30.dp))
+            }
             item { Spacer(Modifier.size(10.dp)) }
             repeat(5) {
                 item { SurveyQuestion() }
