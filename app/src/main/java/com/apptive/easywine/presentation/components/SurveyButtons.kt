@@ -31,7 +31,7 @@ fun ResultButton(
 	Button(
 		onClick = onClick,
 		colors = ButtonDefaults.buttonColors(
-			backgroundColor = gray_button_before
+			backgroundColor = color
 		),
 		modifier = Modifier
 			.width(280.dp)
@@ -43,11 +43,11 @@ fun ResultButton(
 			modifier = Modifier
 				.width(266.dp)
 				.height(50.dp)
-				.border(
-					width = 1.dp,
-					color = Color.White,
-					shape = RoundedCornerShape(70.dp)
-				)
+//				.border(
+//					width = 1.dp,
+//					color = Color.White,
+//					shape = RoundedCornerShape(70.dp)
+//				)
 		) {
 			Text(
 				text = text,

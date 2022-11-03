@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.apptive.easywine.R
 import com.apptive.easywine.enums.Degree
-import com.apptive.easywine.ui.theme.check_button
-import com.apptive.easywine.ui.theme.uncheck_button
+import com.apptive.easywine.ui.theme.wine_button
+import com.apptive.easywine.ui.theme.gray_button_before
 
 @Composable
 fun SurveyQuestion() {
@@ -49,7 +49,7 @@ fun SurveyQuestion() {
 @Composable
 fun QuestionContainer(
 	title: String,
-	color: Color = Color(0xFF5B5B5B)
+	color: Color = gray_button_before
 ) {
 	Row(
 		modifier = Modifier.padding(bottom = 38.dp),
@@ -100,7 +100,7 @@ private fun RadioContainer(
 				Icon(
 					imageVector = if(selectedValue.value == label) Icons.Filled.CheckCircle else Icons.Outlined.Circle,
 					contentDescription = null,
-					tint = if (selectedValue.value == label) check_button else uncheck_button,
+					tint = if (selectedValue.value == label) wine_button else gray_button_before,
 					modifier = Modifier
 						.size(label.radioSize)
 						.selectable(
@@ -132,7 +132,7 @@ private fun RadioContainer(
 fun SideText(
 	leftText: String,
 	rightText: String,
-	color: Color = Color(91, 91, 91)
+	color: Color = gray_button_before
 ) {
 	Row(
 		modifier = Modifier
