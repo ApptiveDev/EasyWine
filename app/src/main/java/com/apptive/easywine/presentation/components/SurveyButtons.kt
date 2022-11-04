@@ -1,12 +1,10 @@
 package com.apptive.easywine.presentation.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.ButtonElevation
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,7 +29,7 @@ fun ResultButton(
 	Button(
 		onClick = onClick,
 		colors = ButtonDefaults.buttonColors(
-			backgroundColor = gray_button_before
+			backgroundColor = color
 		),
 		modifier = Modifier
 			.width(280.dp)
@@ -43,11 +41,11 @@ fun ResultButton(
 			modifier = Modifier
 				.width(266.dp)
 				.height(50.dp)
-				.border(
-					width = 1.dp,
-					color = Color.White,
-					shape = RoundedCornerShape(70.dp)
-				)
+//				.border(
+//					width = 1.dp,
+//					color = Color.White,
+//					shape = RoundedCornerShape(70.dp)
+//				)
 		) {
 			Text(
 				text = text,

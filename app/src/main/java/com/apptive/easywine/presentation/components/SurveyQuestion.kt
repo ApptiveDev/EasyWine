@@ -1,10 +1,12 @@
 package com.apptive.easywine.presentation.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,13 +23,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.apptive.easywine.R
 import com.apptive.easywine.enums.Degree
+import com.apptive.easywine.ui.theme.wine_button
+import com.apptive.easywine.ui.theme.gray_button_before
 
 @Composable
 fun SurveyQuestion() {
 	Column(
 		modifier = Modifier
 			.fillMaxWidth()
-			.background(Color.White) // 추후 삭제
+//			.background(Color.White) // 추후 삭제
 			.padding(vertical = 20.dp)
 			.padding(horizontal = 23.dp)
 			.wrapContentSize(Alignment.Center),
@@ -43,7 +47,7 @@ fun SurveyQuestion() {
 @Composable
 fun QuestionContainer(
 	title: String,
-	color: Color = Color(0xFF5B5B5B)
+	color: Color = gray_button_before
 ) {
 	Row(
 		modifier = Modifier.padding(bottom = 38.dp),
@@ -90,20 +94,33 @@ private fun RadioContainer(
 			if (Degree.DG_NONE != label) {
 
 				// TODO - 별로 안어려우니 radio 버튼을 resource 로 쓰기보다는 코드로 구현해보도록 합시다!
+
 				Icon(
-					painter = painterResource(
-						id = if (selectedValue.value == label) R.drawable.check_circle_kit else R.drawable.uncheck
-					),
+					imageVector = if(selectedValue.value == label) Icons.Filled.CheckCircle else Icons.Outlined.Circle,
 					contentDescription = null,
-//					tint = if (selectedValue.value == label) Color(0xFFD65261) else Color(0xFF929292),
+					tint = if (selectedValue.value == label) wine_button else gray_button_before,
 					modifier = Modifier
 						.size(label.radioSize)
 						.selectable(
 							selected = (selectedValue.value == label),
-							onClick = { selectedValue.value = label },
+							onClick = { selectedValue.value = label},
 							role = Role.RadioButton
 						)
 				)
+//				Icon(
+//					painter = painterResource(
+//						id = if (selectedValue.value == label) R.drawable.check_circle else R.drawable.uncheck
+//					),
+//					contentDescription = null,
+//					tint = if (selectedValue.value == label) Color(0xFFD65261) else Color(0xFF929292),
+//					modifier = Modifier
+//						.size(label.radioSize)
+//						.selectable(
+//							selected = (selectedValue.value == label),
+//							onClick = { selectedValue.value = label },
+//							role = Role.RadioButton
+//						)
+//				)
 			}
 		}
 	}
@@ -113,12 +130,12 @@ private fun RadioContainer(
 fun SideText(
 	leftText: String,
 	rightText: String,
-	color: Color = Color(91, 91, 91)
+	color: Color = gray_button_before
 ) {
 	Row(
 		modifier = Modifier
 			.fillMaxWidth()
-			.padding(horizontal = 20.dp),
+			.padding(horizontal = 24.dp),
 		horizontalArrangement = Arrangement.SpaceBetween
 	) {
 		Text(

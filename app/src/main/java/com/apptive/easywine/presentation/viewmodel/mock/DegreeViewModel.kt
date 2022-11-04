@@ -7,6 +7,6 @@ import com.apptive.easywine.enums.Degree
 import com.apptive.easywine.presentation.viewmodel.interfaces.IDegreeViewModel
 
 class DegreeViewModel: ViewModel(),
-    IDegreeViewModel{
+    IDegreeViewModel {
     override var toDegree: MutableState<Degree> = mutableStateOf(Degree.DG_NONE)
-        }
+}

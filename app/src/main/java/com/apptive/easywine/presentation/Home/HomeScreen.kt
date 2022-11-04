@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import coil.compose.AsyncImage
-import com.android.volley.toolbox.ImageRequest
 import com.apptive.easywine.R
 import com.apptive.easywine.presentation.components.TextTopBar
 import com.apptive.easywine.ui.theme.gray_button
@@ -45,7 +44,7 @@ fun HomeScreen() {
 			.fillMaxSize()
 			.verticalScroll(scrollState)
 	) {
-		TextTopBar(title = "EASY WINE")
+		TextTopBar(title = "EASY WINE",27)
 		WavyLines()
 		HomeMainBanner()
 
