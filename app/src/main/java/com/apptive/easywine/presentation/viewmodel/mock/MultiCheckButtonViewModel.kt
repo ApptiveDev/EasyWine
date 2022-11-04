@@ -1,8 +1,6 @@
 package com.apptive.easywine.presentation.viewmodel.mock
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 
 class MultiCheckButtonViewModel {
     private val isButtonChecked = mutableStateListOf<Boolean>()

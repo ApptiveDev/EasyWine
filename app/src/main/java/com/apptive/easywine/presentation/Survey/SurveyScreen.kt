@@ -1,24 +1,16 @@
 package com.apptive.easywine.presentation.Survey
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.apptive.easywine.R
-import com.apptive.easywine.presentation.Home.QCard
 import com.apptive.easywine.presentation.components.*
 import com.apptive.easywine.ui.theme.gray_button_before
 
@@ -30,22 +22,25 @@ fun SurveyScreen(){
             .background(Color.White)
     ){
         SnackTopBar(title = "오늘의 와인 추천",18)
-        SurveyTopbar()
-        Spacer(modifier = Modifier.height(30.dp))
-        SurveyMainContent()
+        SurveyMainContent("오늘의 와인을 위한 ","바디감 ","질문이에요.")
     }
-
 }
 
 @Composable
-fun SurveyMainContent() {
+fun SurveyMainContent(
+    title_front: String,
+    condition: String,
+    title_back: String
+) {
     val scrollState = rememberScrollState()
     Column(){
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item{
-                SurveyTitle("오늘의 와인을 위한 ","바디감 ","질문이에요.")
+                SurveyTopbar()
+                Spacer(modifier = Modifier.height(30.dp))
+                SurveyTitle(title_front, condition, title_back)
                 Spacer(modifier = Modifier.height(30.dp))
             }
             item { Spacer(Modifier.size(10.dp)) }
