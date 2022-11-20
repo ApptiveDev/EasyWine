@@ -172,7 +172,7 @@ fun SurveyLine(
 ){
     Canvas(
         modifier = Modifier
-            .width(24.dp)
+            .width(50.dp)
             .height(24.dp)
     ){
         val canvasWidth = size.width
@@ -192,21 +192,26 @@ fun BottomShadow(
 ) {
     Box(
         modifier = Modifier
-        .fillMaxWidth()
-        .height(height)
-        .background(
-            brush = Brush.verticalGradient(
-                colors = listOf(
-                    gray_shadow,
-                    Color.Transparent
+            .fillMaxWidth()
+            .height(height)
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        gray_shadow,
+                        Color.Transparent
+                    )
                 )
             )
-        )
     )
 }
 
 @Composable
-fun SurveyTopbar() {
+fun SurveyTopbar(
+    percent: Float,
+    firstState: String,
+    secondState: String,
+    thirdState: String
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -214,16 +219,18 @@ fun SurveyTopbar() {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.height(20.dp) )
-        SurveyProgressBar(prog_percent = 0.7f)
+        SurveyProgressBar(prog_percent = percent)
         Spacer(modifier = Modifier.height(30.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            SurveyCategory(number = 1, state = "done", textKor = "맛", textEng = "flavor")
-            SurveyLine(color = wine_main)
-            SurveyCategory(number = 2, state = "now", textKor = "바디감", textEng = "body")
-            SurveyLine(color = gray_button_before)
-            SurveyCategory(number = 3, state = "yet", textKor = "상황", textEng = "mood")
+            SurveyCategory(number = 1, state = firstState, textKor = "맛", textEng = "flavor")
+            if (firstState == "done") SurveyLine(color = wine_main)
+            else SurveyLine(color = gray_button_before)
+            SurveyCategory(number = 2, state = secondState, textKor = "상황", textEng = "mood")
+            if (secondState == "done") SurveyLine(color = wine_main)
+            else SurveyLine(color = gray_button_before)
+            SurveyCategory(number = 3, state = thirdState, textKor = "기타", textEng = "etc")
         }
         Spacer(modifier = Modifier.height(25.dp))
         BottomShadow(alpha = 255, height = 8.dp)
@@ -234,7 +241,7 @@ fun SurveyTopbar() {
 @Composable
 fun PreviewSurveyTopbar(){
     Column {
-        SurveyTopbar()
+        SurveyTopbar(0.7F,"done","now","yet")
     }
 }
 

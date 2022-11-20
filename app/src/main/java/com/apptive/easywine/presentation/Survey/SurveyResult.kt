@@ -113,7 +113,7 @@ fun WinePageNav(
 
 @Composable
 private fun Heart(){
-    val clicked = remember { mutableStateOf(false) }
+    val clicked = remember { mutableStateOf(true) }
     Button(
         onClick = { clicked.value = !clicked.value },
         colors = ButtonDefaults.buttonColors(

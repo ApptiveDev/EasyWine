@@ -22,12 +22,16 @@ fun SurveyScreen(){
             .background(Color.White)
     ){
         SnackTopBar(title = "오늘의 와인 추천",18)
-        SurveyMainContent("오늘의 와인을 위한 ","바디감 ","질문이에요.")
+        SurveyMainContent(0.7F,"now","yet","yet","오늘의 와인을 위한 ","바디감 ","질문이에요.")
     }
 }
 
 @Composable
 fun SurveyMainContent(
+    percent: Float,
+    firstState: String,
+    secondState: String,
+    thirdState: String,
     title_front: String,
     condition: String,
     title_back: String
@@ -38,7 +42,7 @@ fun SurveyMainContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item{
-                SurveyTopbar()
+                SurveyTopbar(percent, firstState, secondState, thirdState)
                 Spacer(modifier = Modifier.height(30.dp))
                 SurveyTitle(title_front, condition, title_back)
                 Spacer(modifier = Modifier.height(30.dp))
