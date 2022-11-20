@@ -2,10 +2,19 @@ package com.apptive.easywine.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.apptive.easywine.R
 
+val notosanskr = FontFamily(
+	Font(R.font.notosanskr_regular, FontWeight.Normal),
+	Font(R.font.notosanskr_bold, FontWeight.Bold),
+	Font(R.font.notosanskr_light, FontWeight.Light),
+	Font(R.font.notosanskr_medium, FontWeight.Medium),
+	Font(R.font.notosanskr_thin, FontWeight.Thin),
+)
 //private val Nunito = FontFamily(
 //	Font(R.font , FontWeight.Normal),
 //	Font(R.font.Nunito_bold, FontWeight.Bold),
