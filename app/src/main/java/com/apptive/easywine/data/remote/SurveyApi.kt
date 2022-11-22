@@ -9,15 +9,15 @@ interface SurveyApi {
 	// api for requesting questions type 1
 	@GET("/question/category/1")
 	suspend fun getQuestion1(
-	): Response<Question>
+	): Response<List<Question>>
 
 	// api for requesting questions type 2
 	@GET("/question/category/2")
 	suspend fun getQuestion2(
-	): Response<Question>
+	): Response<List<Question>>
 
 	// api for requesting questions type 3
 	@GET("/question/category/3")
 	suspend fun getQuestion3(
-	): Response<Question>
+	): Response<List<Question>>
 }

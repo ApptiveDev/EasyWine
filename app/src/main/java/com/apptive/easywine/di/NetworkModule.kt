@@ -2,6 +2,9 @@ package com.apptive.easywine.di
 
 import android.util.Log
 import com.apptive.easywine._const.NetworkConst.BASE_URL
+import com.apptive.easywine.data.remote.SurveyApi
+import com.apptive.easywine.data.repository.SurveyRepositoryImpl
+import com.apptive.easywine.domain.repository.SurveyRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,8 +44,8 @@ object NetworkModule {
 	fun provideLoggingInterceptor(): HttpLoggingInterceptor =
 		HttpLoggingInterceptor() {
 			Log.d(
+				"HTTP",
 				it,
-				"HTTP/REST"
 			)
 		}.setLevel(HttpLoggingInterceptor.Level.BODY)
 
@@ -67,6 +70,18 @@ object NetworkModule {
 			.addConverterFactory(GsonConverterFactory.create())
 			.client(client)
 			.build()
+	}
+
+	@Provides
+	@Singleton
+	fun provideSurveyApi(retrofit: Retrofit): SurveyApi {
+		return retrofit.create(SurveyApi::class.java)
+	}
+
+	@Provides
+	@Singleton
+	fun provideSurveyRepository(api: SurveyApi): SurveyRepository {
+		return SurveyRepositoryImpl(api)
 	}
 
 }

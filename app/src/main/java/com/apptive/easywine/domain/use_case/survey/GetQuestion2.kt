@@ -15,7 +15,7 @@ import javax.inject.Inject
 class GetQuestion2 @Inject constructor(
     val repository: SurveyRepository
 ){
-    operator fun invoke(): Flow<Resource<Question>> = flow {
+    operator fun invoke(): Flow<Resource<List<Question>>> = flow {
         try {
             emit(Resource.Loading())
             val r = repository.getQuestion2()

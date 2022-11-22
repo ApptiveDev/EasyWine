@@ -1,12 +1,10 @@
 package com.apptive.easywine.domain.repository
 
-import com.apptive.easywine.data.remote.response.QuestionDTO
+import com.apptive.easywine.domain.model.Question
 import retrofit2.Response
-import java.io.File
 
 interface SurveyRepository {
-
-	suspend fun getQuestion1(): Response<QuestionDTO>
-	suspend fun getQuestion2(): Response<QuestionDTO>
-	suspend fun getQuestion3(): Response<QuestionDTO>
+	suspend fun getQuestion1(): Response<List<Question>>
+	suspend fun getQuestion2(): Response<List<Question>>
+	suspend fun getQuestion3(): Response<List<Question>>
 }
