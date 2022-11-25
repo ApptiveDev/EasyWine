@@ -23,9 +23,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.apptive.easywine.R
 import com.apptive.easywine.presentation.components.TextTopBar
+import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.ui.theme.gray_button
 import com.apptive.easywine.ui.theme.gray_text
 import com.apptive.easywine.ui.theme.white_gray
@@ -34,7 +38,9 @@ import com.google.accompanist.pager.*
 import kotlin.math.absoluteValue
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+	navController: NavController = rememberNavController(),
+) {
 
 	val scrollState = rememberScrollState()
 
@@ -46,7 +52,9 @@ fun HomeScreen() {
 	) {
 		TextTopBar(title = "EASY WINE",27)
 		WavyLines()
-		HomeMainBanner()
+		HomeMainBanner() {
+			navController.navigate(Screen.SurveyScreen.route)
+		}
 
 		Spacer(modifier = Modifier.size(30.dp))
 
@@ -57,7 +65,9 @@ fun HomeScreen() {
 }
 
 @Composable
-fun HomeMainBanner() {
+fun HomeMainBanner(
+	onSurveyClick : () -> Unit,
+) {
 	Box(
 		modifier = Modifier
 			.fillMaxWidth()
@@ -99,7 +109,7 @@ fun HomeMainBanner() {
 		)
 
 		Button(
-			onClick = {}, // TODO naviagate to surveyform
+			onClick = onSurveyClick,
 			modifier = Modifier
 				.align(Alignment.BottomCenter)
 				.size(212.dp, 47.dp),
