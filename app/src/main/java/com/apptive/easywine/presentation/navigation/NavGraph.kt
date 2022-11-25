@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.apptive.easywine.presentation.Home.HomeScreen
+import com.apptive.easywine.presentation.Survey.SurveyScreen
 
 fun NavGraphBuilder.easyWineGraph(
 	navController: NavController,
@@ -14,11 +15,11 @@ fun NavGraphBuilder.easyWineGraph(
 	}
 
 	composable(Screen.HomeScreen.route) {
-		HomeScreen()
+		HomeScreen(navController)
 	}
 
 	composable(Screen.SurveyScreen.route) {
-		// Survey Screen
+		SurveyScreen(navController)
 	}
 
 	composable(Screen.StorageScreen.route) {

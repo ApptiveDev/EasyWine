@@ -27,7 +27,10 @@ import com.apptive.easywine.ui.theme.wine_button
 import com.apptive.easywine.ui.theme.gray_button_before
 
 @Composable
-fun SurveyQuestion() {
+fun SurveyQuestion(
+	questionContent: String = "",
+	questionId: Long = 0L,
+) {
 	Column(
 		modifier = Modifier
 			.fillMaxWidth()
@@ -37,7 +40,7 @@ fun SurveyQuestion() {
 			.wrapContentSize(Alignment.Center),
 		horizontalAlignment = Alignment.CenterHorizontally,
 	) {
-		QuestionContainer("Q1. 어느 정도의 당도를 원하세요?  ")
+		QuestionContainer("Q$questionId. $questionContent")
 		RadioContainer()
 		SideText("엷다", "부드럽다")
 	}
