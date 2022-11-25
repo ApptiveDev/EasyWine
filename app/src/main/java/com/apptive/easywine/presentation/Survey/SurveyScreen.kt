@@ -15,87 +15,90 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.apptive.easywine.domain.model.Question
+import com.apptive.easywine.enums.SurveyLevel
 import com.apptive.easywine.presentation.components.*
 import com.apptive.easywine.ui.theme.gray_button_before
 
 @Composable
 fun SurveyScreen(
-    navController: NavController = rememberNavController(),
-    surveyViewModel: SurveyViewModel = hiltViewModel(),
-){
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .background(Color.White)
-    ){
-        SnackTopBar(title = "오늘의 와인 추천",18)
+	navController: NavController = rememberNavController(),
+	surveyViewModel: SurveyViewModel = hiltViewModel(),
+) {
+	Column(
+		horizontalAlignment = Alignment.CenterHorizontally,
+		modifier = Modifier
+			.background(Color.White)
+	) {
+		SnackTopBar(title = "오늘의 와인 추천", 18)
 
-        SurveyMainContent(
+		SurveyMainContent(
+            0.7F,
+			surveyViewModel.level,
             "오늘의 와인을 위한 ",
             "바디감 ",
             "질문이에요.",
             surveyViewModel.questions1
         )
-    }
+	}
 }
 
 @Composable
 fun SurveyMainContent(
-    percent: Float,
-    firstState: String,
-    secondState: String,
-    thirdState: String,
-    title_front: String,
-    condition: String,
-    title_back: String,
-    questions1: List<Question>,
+	percent: Float,
+	level: SurveyLevel,
+	title_front: String,
+	condition: String,
+	title_back: String,
+	questions1: List<Question>,
 ) {
-    val scrollState = rememberScrollState()
-    Column(){
-        LazyColumn(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            item{
-                SurveyTopbar(percent, firstState, secondState, thirdState)
-                Spacer(modifier = Modifier.height(30.dp))
-                SurveyTitle(title_front, condition, title_back)
-                Spacer(modifier = Modifier.height(30.dp))
-            }
-            item { Spacer(Modifier.size(10.dp)) }
-            questions1.forEach {
-                item { SurveyQuestion(
-                    questionContent = it.context,
-                    questionId = it.id,
-                ) }
-            }
-            item {
-                SurveyBottomButton()
-            }
-        }
-    }
+	val scrollState = rememberScrollState()
+	Column() {
+		LazyColumn(
+			horizontalAlignment = Alignment.CenterHorizontally
+		) {
+			item {
+				SurveyTopbar(percent, level)
+				Spacer(modifier = Modifier.height(30.dp))
+				SurveyTitle(title_front, condition, title_back)
+				Spacer(modifier = Modifier.height(30.dp))
+			}
+			item { Spacer(Modifier.size(10.dp)) }
+			questions1.forEach {
+				item {
+					SurveyQuestion(
+						questionContent = it.context,
+						questionId = it.id,
+					)
+				}
+			}
+			item {
+				SurveyBottomButton()
+			}
+		}
+	}
 }
 
 @Composable
-fun SurveyBottomButton(){
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Spacer(modifier = Modifier.height(25.dp))
-        Row {
-            PageNav(isLeft = true)
-            Spacer(modifier = Modifier.size(30.dp))
-            PageNav(isLeft = false)
-        }
-        ResultButton(
-            text = "오늘의 와인 확인하기",
-            color = gray_button_before
-        )
-        Spacer(modifier = Modifier.height(50.dp))
-    }
+fun SurveyBottomButton() {
+	Column(
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+		Spacer(modifier = Modifier.height(25.dp))
+		Row {
+			PageNav(isLeft = true)
+			Spacer(modifier = Modifier.size(30.dp))
+			PageNav(isLeft = false)
+		}
+		ResultButton(
+			text = "오늘의 와인 확인하기",
+			color = gray_button_before
+		)
+		Spacer(modifier = Modifier.height(50.dp))
+	}
 }
 
 @Preview
 @Composable
 fun PreviewSurveyScreen() {
-    SurveyScreen()
+	SurveyScreen()
 }
