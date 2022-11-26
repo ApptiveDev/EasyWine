@@ -1,24 +1,23 @@
 package com.apptive.easywine.presentation.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.apptive.easywine.R
+import com.apptive.easywine.ui.theme.gray_button
+import com.apptive.easywine.ui.theme.gray_button_before
+import com.apptive.easywine.ui.theme.notosanskr
 
 
 @Composable
@@ -30,14 +29,6 @@ fun TopBar(
 			.fillMaxWidth()
 			.wrapContentHeight(),
 	) {
-		Image(
-			painterResource(id = R.drawable.top_banner),
-			contentDescription = "top bar image",
-			contentScale = ContentScale.FillWidth,
-			modifier = Modifier
-				.fillMaxWidth()
-				.align(Alignment.TopCenter)
-		 )
 		content()
 	}
 
@@ -47,19 +38,40 @@ fun TopBar(
 fun TextTopBar(
 	title: String,
 	fontSize: Int,
-	color: Color = Color.White
+	color: Color = gray_button
 ) {
 	TopBar {
-		Text(
-			text = title,
-			fontFamily = FontFamily.SansSerif,
-			fontSize = fontSize.sp,
-			fontWeight = FontWeight(824),
-			color = color,
-			modifier = Modifier
-				.padding(bottom = 10.dp)
-				.align(Alignment.BottomCenter)
-		)
+		Column(
+			modifier = Modifier.align(Alignment.TopEnd)
+		) {
+			Spacer(modifier = Modifier.height(20.dp))
+			Row(
+				modifier = Modifier
+					.padding(end = 9.dp)
+					.fillMaxWidth()
+					.wrapContentSize(Alignment.TopEnd)
+			) {
+				Text(
+					text = title,
+					fontFamily = notosanskr,
+					fontSize = fontSize.sp,
+					fontWeight = FontWeight.Medium,
+					color = color,
+					modifier = Modifier
+						.padding(top = 20.dp)
+				)
+				Spacer(modifier = Modifier.width(70.dp))
+				IconButton(onClick = { /*TODO*/ }) {
+					Icon(
+						imageVector = Icons.Filled.Menu,
+						contentDescription = "Menu",
+						tint = gray_button_before,
+						modifier = Modifier
+							.size(43.dp)
+					)
+				}
+			}
+		}
 	}
 }
 
@@ -67,7 +79,7 @@ fun TextTopBar(
 fun SnackTopBar(
 	title: String,
 	fontSize: Int,
-	color: Color = Color.White
+	color: Color = gray_button
 ){
 	TopBar{
 		Column() {
@@ -81,7 +93,7 @@ fun SnackTopBar(
 					Icon(
 						imageVector = Icons.Filled.KeyboardDoubleArrowLeft,
 						contentDescription = "Menu",
-						tint = Color.White,
+						tint = gray_button_before,
 						modifier = Modifier
 							.size(45.dp)
 					)
@@ -89,9 +101,9 @@ fun SnackTopBar(
 				Spacer(modifier = Modifier.width(70.dp))
 				Text(
 					text = title,
-					fontFamily = FontFamily.SansSerif,
+					fontFamily = notosanskr,
 					fontSize = fontSize.sp,
-					fontWeight = FontWeight(824),
+					fontWeight = FontWeight.Medium,
 					color = color,
 					modifier = Modifier
 						.padding(top = 20.dp)
@@ -101,7 +113,7 @@ fun SnackTopBar(
 					Icon(
 						imageVector = Icons.Filled.Menu,
 						contentDescription = "Menu",
-						tint = Color.White,
+						tint = gray_button_before,
 						modifier = Modifier
 							.size(43.dp)
 					)
@@ -116,7 +128,8 @@ fun SnackTopBar(
 fun PreviewTopBar() {
 	Column {
 		TopBar()
-		TextTopBar(title = "EASY WINE",27)
-		SnackTopBar(title = "EASY WINE",27)
+		TextTopBar(title = "EASY WINE", 27)
+		SnackTopBar(title = "EASY WINE", 27)
 	}
+
 }

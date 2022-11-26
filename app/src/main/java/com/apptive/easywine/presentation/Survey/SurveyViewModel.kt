@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.apptive.easywine.domain.model.Question
 import com.apptive.easywine.domain.use_case.survey.GetQuestions
 import com.apptive.easywine.domain.util.Resource
+import com.apptive.easywine.enums.SurveyLevel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.launch
@@ -24,6 +25,8 @@ class SurveyViewModel @Inject constructor(
 	var questions2 by mutableStateOf(emptyList<Question>())
 		private set
 	var questions3 by mutableStateOf(emptyList<Question>())
+		private set
+	var level by mutableStateOf(SurveyLevel.FLAVOR)
 		private set
 
 	init {

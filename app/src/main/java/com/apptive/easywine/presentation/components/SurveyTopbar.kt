@@ -24,217 +24,232 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.apptive.easywine.R
+import com.apptive.easywine.enums.SurveyLevel
+import com.apptive.easywine.enums.SurveyState
 import com.apptive.easywine.ui.theme.*
 
 @Composable
-fun SurveyProgressBar(prog_percent : Float){
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        Text(
-            text = "응답 진행률",
-            color = gray_button,
-            fontSize = 15.sp,
-            fontWeight = FontWeight.ExtraBold
-        )
-        LinearProgressIndicator(
-            progress = prog_percent,
-            modifier = Modifier
-                .width(195.dp)
-                .height(6.dp)
-                .clip(shape = RoundedCornerShape(30.dp)),
-            backgroundColor = progressbar_before,
-            color = wine_main
-        )
-        Text(
-            text = (prog_percent * 100).toInt().toString() + "%",
-            fontSize = 13.sp,
-            color = wine_main
-        )
-    }
+fun SurveyProgressBar(prog_percent: Float) {
+	Row(
+		verticalAlignment = Alignment.CenterVertically,
+		horizontalArrangement = Arrangement.spacedBy(16.dp)
+	) {
+		Text(
+			text = "응답 진행률",
+			color = gray_button,
+			fontSize = 15.sp,
+			fontWeight = FontWeight.ExtraBold
+		)
+		LinearProgressIndicator(
+			progress = prog_percent,
+			modifier = Modifier
+				.width(195.dp)
+				.height(6.dp)
+				.clip(shape = RoundedCornerShape(30.dp)),
+			backgroundColor = progressbar_before,
+			color = wine_main
+		)
+		Text(
+			text = (prog_percent * 100).toInt().toString() + "%",
+			fontSize = 13.sp,
+			color = wine_main
+		)
+	}
 }
 
 @Composable
 fun SurveyCategory(
-    number: Int,
-    state: String, ///done,now,yet 세 가지로 분류
-    textKor: String,
-    textEng: String
-){
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        when (state){
-            "done" -> {
-                SurveyCategoryCircle(number = number, color = wine_main, state = state)
-                Spacer(modifier = Modifier.size(4.dp))
-                SurveyCategoryText(firstLine = textKor, secondLine = textEng, firstColor = gray_text, secondColor = gray_button_before)
-            }
-            "now" -> {
-                SurveyCategoryCircle(number = number, color = wine_button, state = state)
-                Spacer(modifier = Modifier.size(4.dp))
-                SurveyCategoryText(firstLine = textKor, secondLine = textEng, firstColor = wine_main, secondColor = wine_main)
-            }
-            "yet" -> {
-                SurveyCategoryCircle(number = number, color = gray_button_before, state = state)
-                Spacer(modifier = Modifier.size(4.dp))
-                SurveyCategoryText(firstLine = textKor, secondLine = textEng, firstColor = gray_button_before, secondColor = gray_button_before)
-            }
-        }
-    }
+	state: SurveyState,
+	number: Int,
+	textKor: String,
+	textEng: String,
+) {
+	Column(
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+
+		SurveyCategoryCircle(number = number, color = state.circleColor, state = state)
+		Spacer(modifier = Modifier.size(4.dp))
+		SurveyCategoryText(
+			firstLine = textKor,
+			secondLine = textEng,
+			color = state.textColor,
+		)
+	}
 
 }
 
 @Composable
 fun SurveyCategoryCircle(
-    number: Int,
-    color: Color,
-    state: String
-){
-    if (state == "now") {
-        Box(
-            modifier = Modifier
-                .width(24.dp)
-                .height(24.dp)
-                .clip(CircleShape)
-                .background(color = color)
-        ){
-            Text(
-                text = number.toString(),
-                color = Color.White,
-                fontSize = 14.sp,
-                modifier = Modifier
-                    .align(Alignment.Center)
-            )
-        }
-    } else {
-        Box(
-            modifier = Modifier
-                .width(24.dp)
-                .height(24.dp)
-                .border(
-                    width = 1.dp,
-                    color = color,
-                    shape = CircleShape
-                )
-        ){
-            if (state == "done") {
-                Image(
-                    painterResource(id = R.drawable.check_icon),
-                    contentDescription = "is done",
-                    modifier = Modifier
-                        .height(8.6.dp)
-                        .width(10.7.dp)
-                        .align(Alignment.Center)
-                        .background(Color.Transparent)
-                )
-            } else {
-                Text(
-                    text = number.toString(),
-                    color = color,
-                    fontSize = 14.sp,
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                )
-            }
-    }
+	number: Int,
+	color: Color,
+	state: SurveyState,
+) {
+	when (state) {
+		SurveyState.YET -> {
+			Box(
+				modifier = Modifier
+					.width(24.dp)
+					.height(24.dp)
+					.border(
+						width = 1.dp,
+						color = color,
+						shape = CircleShape
+					)
+			) {
+				Text(
+					text = number.toString(),
+					color = color,
+					fontSize = 14.sp,
+					modifier = Modifier
+						.align(Alignment.Center)
+				)
+			}
+		}
+		SurveyState.NOW -> {
+			Box(
+				modifier = Modifier
+					.width(24.dp)
+					.height(24.dp)
+					.clip(CircleShape)
+					.background(color = color)
+			) {
+				Text(
+					text = number.toString(),
+					color = Color.White,
+					fontSize = 14.sp,
+					modifier = Modifier
+						.align(Alignment.Center)
+				)
+			}
+		}
+		SurveyState.DONE -> {
+			Box(
+				modifier = Modifier
+					.width(24.dp)
+					.height(24.dp)
+					.border(
+						width = 1.dp,
+						color = color,
+						shape = CircleShape
+					)
+			) {
+				Image(
+					painterResource(id = R.drawable.check_icon),
+					contentDescription = "is done",
+					modifier = Modifier
+						.height(8.6.dp)
+						.width(10.7.dp)
+						.align(Alignment.Center)
+						.background(Color.Transparent)
+				)
+			}
+		}
 
-    }
+	}
 }
 
 @Composable
 fun SurveyCategoryText(
-    firstLine: String,
-    secondLine: String,
-    firstColor: Color,
-    secondColor: Color
-){
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = firstLine,
-            color = firstColor,
-            fontSize = 14.sp
-        )
-        Text(
-            text = secondLine,
-            color = secondColor.copy(alpha = 0.5f),
-            fontSize = 14.sp
-        )
-    }
+	firstLine: String,
+	secondLine: String,
+	color: Color,
+) {
+	Column(
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+		Text(
+			text = firstLine,
+			color = color,
+			fontSize = 14.sp
+		)
+		Text(
+			text = secondLine,
+			color = color.copy(alpha = 0.5f),
+			fontSize = 14.sp
+		)
+	}
 }
 
 @Composable
 fun SurveyLine(
-    color: Color
-){
-    Canvas(
-        modifier = Modifier
-            .width(24.dp)
-            .height(24.dp)
-    ){
-        val canvasWidth = size.width
-        drawLine(
-            start = Offset(x = 0f, y = 0f),
-            end = Offset(x = canvasWidth, y = 0f),
-            strokeWidth = 2F,
-            color = color
-        )
-    }
+	color: Color,
+) {
+	Canvas(
+		modifier = Modifier
+			.width(50.dp)
+			.height(24.dp)
+	) {
+		val canvasWidth = size.width
+		drawLine(
+			start = Offset(x = 0f, y = 0f),
+			end = Offset(x = canvasWidth, y = 0f),
+			strokeWidth = 2F,
+			color = color
+		)
+	}
 }
 
 @Composable
 fun BottomShadow(
-    alpha: Int = 255,
-    height: Dp = 8.dp
+	alpha: Int = 255,
+	height: Dp = 8.dp,
 ) {
-    Box(
-        modifier = Modifier
-        .fillMaxWidth()
-        .height(height)
-        .background(
-            brush = Brush.verticalGradient(
-                colors = listOf(
-                    gray_shadow,
-                    Color.Transparent
-                )
-            )
-        )
-    )
+	Box(
+		modifier = Modifier
+			.fillMaxWidth()
+			.height(height)
+			.background(
+				brush = Brush.verticalGradient(
+					colors = listOf(
+						gray_shadow,
+						Color.Transparent
+					)
+				)
+			)
+	)
 }
 
 @Composable
-fun SurveyTopbar() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentSize(Alignment.Center),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Spacer(modifier = Modifier.height(20.dp) )
-        SurveyProgressBar(prog_percent = 0.7f)
-        Spacer(modifier = Modifier.height(30.dp))
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            SurveyCategory(number = 1, state = "done", textKor = "맛", textEng = "flavor")
-            SurveyLine(color = wine_main)
-            SurveyCategory(number = 2, state = "now", textKor = "바디감", textEng = "body")
-            SurveyLine(color = gray_button_before)
-            SurveyCategory(number = 3, state = "yet", textKor = "상황", textEng = "mood")
-        }
-        Spacer(modifier = Modifier.height(25.dp))
-        BottomShadow(alpha = 255, height = 8.dp)
-    }
+fun SurveyTopbar(
+	percent: Float,
+	level: SurveyLevel,
+) {
+	Column(
+		modifier = Modifier
+			.fillMaxWidth()
+			.wrapContentSize(Alignment.Center),
+		horizontalAlignment = Alignment.CenterHorizontally,
+	) {
+		Spacer(modifier = Modifier.height(20.dp))
+		SurveyProgressBar(prog_percent = percent)
+		Spacer(modifier = Modifier.height(30.dp))
+		Row(
+			verticalAlignment = Alignment.CenterVertically
+		) {
+			SurveyLevel.values().forEach {
+
+				SurveyCategory(
+					state = level.stateCalculator(it),
+					number = it.number,
+					textKor = it.korText,
+					textEng = it.engText,
+				)
+
+				if(level.stateCalculator(it) == SurveyState.DONE) SurveyLine(color = wine_main)
+				else if(it != SurveyLevel.ETC) SurveyLine(color = gray_button_before)
+			}
+		}
+		Spacer(modifier = Modifier.height(25.dp))
+		BottomShadow(alpha = 255, height = 8.dp)
+	}
 }
 
 @Preview
 @Composable
-fun PreviewSurveyTopbar(){
-    Column {
-        SurveyTopbar()
-    }
+fun PreviewSurveyTopbar() {
+	Column {
+		SurveyTopbar(0.7F, SurveyLevel.MOOD)
+	}
 }
 
