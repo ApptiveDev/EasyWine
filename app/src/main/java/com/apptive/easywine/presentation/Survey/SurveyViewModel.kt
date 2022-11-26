@@ -27,6 +27,7 @@ class SurveyViewModel @Inject constructor(
 	var questions3 by mutableStateOf(emptyList<Question>())
 		private set
 	var level by mutableStateOf(SurveyLevel.FLAVOR)
+		private set
 
 	init {
 		getQuestion1()

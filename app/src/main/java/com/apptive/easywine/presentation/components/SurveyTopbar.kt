@@ -228,17 +228,15 @@ fun SurveyTopbar(
 			verticalAlignment = Alignment.CenterVertically
 		) {
 			SurveyLevel.values().forEach {
+
 				SurveyCategory(
-					state =
-					if(level.number == it.number) com.apptive.easywine.enums.SurveyState.NOW
-					else if(level.number > it.number) com.apptive.easywine.enums.SurveyState.DONE
-					else com.apptive.easywine.enums.SurveyState.YET
-					,
+					state = level.stateCalculator(it),
 					number = it.number,
 					textKor = it.korText,
 					textEng = it.engText,
 				)
-				if(it == SurveyLevel.FLAVOR && it.number > 1) SurveyLine(color = wine_main)
+
+				if(level.stateCalculator(it) == SurveyState.DONE) SurveyLine(color = wine_main)
 				else if(it != SurveyLevel.ETC) SurveyLine(color = gray_button_before)
 			}
 		}
