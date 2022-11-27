@@ -5,22 +5,25 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apptive.easywine.domain.model.EmailPassword
+import com.apptive.easywine.domain.use_case.member.doLogin
+import com.apptive.easywine.domain.util.Resource
 import com.apptive.easywine.domain.util.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-//	loginUseCases: LoginUseCases
+	private val doLoginUseCase: doLogin
 ): ViewModel() {
 	private var _emailPw = mutableStateOf(
 		EmailPassword(
 			// TODO: delete later
 			email = "test1",
-			pass = "test1",
+			pass = "1234",
 		)
 	)
 	val emailPw: State<EmailPassword> = _emailPw
@@ -28,9 +31,8 @@ class LoginViewModel @Inject constructor(
 	private val _eventFlow = MutableSharedFlow<UiEvent>()
 	val eventFlow = _eventFlow.asSharedFlow()
 
-	/*
 	private suspend fun login() {
-		loginUseCases.doLogin(_emailPw.value).collectLatest {
+		doLoginUseCase(_emailPw.value).collectLatest {
 			when (it) {
 				is Resource.Success -> {
 					_eventFlow.emit(UiEvent.Login)
@@ -44,12 +46,6 @@ class LoginViewModel @Inject constructor(
 				}
 			}
 		}
-	}
-	 */
-
-	private suspend fun login() {
-		_eventFlow.emit(UiEvent.Login)
-		//_eventFlow.emit(UiEvent.Error("cannot login"))
 	}
 
 	fun onEvent(event: LoginEvent) {
