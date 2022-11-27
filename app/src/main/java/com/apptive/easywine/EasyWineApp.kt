@@ -19,7 +19,7 @@ fun EasyWineApp() {
 			var navController = rememberNavController()
 			NavHost(
 				navController = navController,
-				startDestination = Screen.HomeScreen.route
+				startDestination = Screen.LoginScreen.route,
 			) {
 				easyWineGraph(
 					navController = navController
