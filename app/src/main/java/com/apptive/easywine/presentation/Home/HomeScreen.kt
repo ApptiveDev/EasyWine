@@ -1,325 +1,272 @@
 package com.apptive.easywine.presentation.Home
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.util.lerp
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.compose.rememberNavController
-import coil.compose.AsyncImage
 import com.apptive.easywine.R
 import com.apptive.easywine.presentation.components.TextTopBar
 import com.apptive.easywine.presentation.navgation.Screen
-import com.apptive.easywine.ui.theme.gray_button
-import com.apptive.easywine.ui.theme.gray_text
-import com.apptive.easywine.ui.theme.white_gray
-import com.apptive.easywine.ui.theme.wine_main
-import com.google.accompanist.pager.*
-import kotlin.math.absoluteValue
+import com.apptive.easywine.ui.theme.*
 
 @Composable
 fun HomeScreen(
-	navController: NavController = rememberNavController(),
+    navController: NavController = rememberNavController(),
 ) {
 
-	val scrollState = rememberScrollState()
+    val scrollState = rememberScrollState()
 
-	Column(
-		modifier = Modifier
-			.background(Color.White)
-			.fillMaxSize()
-			.verticalScroll(scrollState)
-	) {
-		TextTopBar(title = "EASY WINE",27)
-		WavyLines()
-		HomeMainBanner() {
-			navController.navigate(Screen.SurveyScreen.route)
-		}
-
-		Spacer(modifier = Modifier.size(30.dp))
-
-		OtherServices()
-	}
+    Column(
+        modifier = Modifier
+            .background(Color.White)
+            .fillMaxSize()
+            .verticalScroll(scrollState)
+    ) {
+        TextTopBar(title = "EASY WINE",27)
+        Spacer(modifier = Modifier.size(60.dp))
+        HomeMainBanner()
+        StartAndOtherServices(){
+            navController.navigate(Screen.SurveyScreen.route)
+        }
+    }
 
 
 }
 
 @Composable
-fun HomeMainBanner(
-	onSurveyClick : () -> Unit,
+fun HomeMainBanner() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ) {
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(310.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.Center)
+            ) {
+                Image(
+                    painterResource(id = R.drawable.wine_img),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .padding(start = 53.dp)
+                        .height(280.dp)
+                        .width(100.dp)
+                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .padding(start = 120.dp)
+                        .fillMaxSize()
+                ){
+                    Spacer(Modifier.size(10.dp))
+                    Box(){
+                        Text(
+                            text = "RUBY PORT",
+                            fontSize = 35.sp,
+                            fontWeight = FontWeight(700),
+                            color = wine_title,
+                        )
+                        Text(
+                            text = "Port Wine",
+                            fontSize = 16.sp,
+                            fontFamily = notosanskr,
+                            fontWeight = FontWeight(500),
+                            modifier = Modifier
+                                .padding(top = 35.dp,start = 110.dp)
+                        )
+                    }
+                    Spacer(Modifier.size(15.dp))
+                    Text(
+                        text = "나무통에서 4~5년\n숙성된 와인을\n브랜딩하여 만들어지며,\n루비색을 띈다.",
+                        fontSize = 16.sp,
+                        fontFamily = notosanskr,
+                        color = wine_description,
+                        fontWeight = FontWeight(400),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+        }
+
+    }
+}
+
+
+@Composable
+fun StartAndOtherServices(
+    onSurveyClick : () -> Unit,
 ) {
-	Box(
-		modifier = Modifier
-			.fillMaxWidth()
-			.height(400.dp)
-	) {
-		Surface(
-			modifier = Modifier
-				.fillMaxWidth()
-				.fillMaxHeight()
-				.shadow(elevation = 2.dp, shape = CircleShape, clip = true)
-		) {
-			WineBannerPager(
-				listOf(
-					"https://user-images.githubusercontent.com/46425142/192774628-d66ad349-5d77-446d-894b-914d9bfede43.png",
-					"https://user-images.githubusercontent.com/46425142/192770225-de2198ae-955f-44e6-b00a-403ad29dc942.png",
-					"https://user-images.githubusercontent.com/46425142/192770249-56ccf188-8517-451e-b9f1-e379f5f7e21f.png",
-					"https://user-images.githubusercontent.com/46425142/192770281-792f3796-d76e-464a-9967-7b9daf86d75e.png",
-					"https://user-images.githubusercontent.com/46425142/192770309-fb401cca-300f-48b8-8eff-66405a134659.png"
-				)
-			)
-		}
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(370.dp)
+                .padding(top = 45.dp)
+                .clip(RoundedCornerShape(25.dp, 25.dp, 0.dp, 0.dp))
+                .background(white_gray),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Spacer(modifier = Modifier.size(33.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp)
+            ) {
+                Text(
+                    text = "Other Services",
+                    color = gray_button_before,
+                    fontFamily = notosanskr,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 15.sp
+                )
+            }
+            Spacer(Modifier.size(15.dp))
+            QCard("와인 창고", "현재까지 추천받은 와인들")
+            Spacer(Modifier.size(20.dp))
+            QCard("와인 잡지", "와인에 대한 어떤 것")
+        }
 
-		Icon(
-			painter = painterResource(id = R.drawable.wine_right_arrow),
-			contentDescription = "wine_right_arrow icon",
-			modifier = Modifier
-				.size(50.dp)
-				.align(Alignment.CenterStart),
-			tint = wine_main
-		)
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(end = 36.dp)
+        ) {
+            Text(
+                text = "오늘의 추천 와인은?",
+                color = wine_main,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+            )
+            Spacer(modifier = Modifier.size(3.dp))
+            Box(modifier = Modifier.size(170.dp,90.dp).align(Alignment.BottomCenter), contentAlignment = Alignment.Center){
+                Button(
+                    onClick = onSurveyClick,
+                    modifier = Modifier
+                        .size(167.dp, 39.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = wine_button,
+                    ),
+                    shape = RoundedCornerShape(20.dp)
+                ) {}
+                Text(
+                    text = "start",
+                    fontSize = 20.sp,
+                    fontFamily = notosanskr,
+                    color = Color.White,
+                    fontWeight = FontWeight.ExtraBold
+                )
+            }
 
-		Icon(
-			painter = painterResource(id = R.drawable.wine_left_arrow),
-			contentDescription = "wine_left_arrow icon",
-			modifier = Modifier
-				.size(50.dp)
-				.align(Alignment.CenterEnd),
-			tint = wine_main
-		)
-
-		Button(
-			onClick = onSurveyClick,
-			modifier = Modifier
-				.align(Alignment.BottomCenter)
-				.size(212.dp, 47.dp),
-			colors = ButtonDefaults.buttonColors(
-				backgroundColor = wine_main
-			),
-			shape = RoundedCornerShape(9.dp)
-		) {
-			Text(
-				text = "검사하기",
-				color = Color.White,
-				fontSize = 20.sp,
-				fontWeight = FontWeight.ExtraBold
-			)
-		}
-	}
-}
-
-@OptIn(ExperimentalPagerApi::class)
-@Composable
-private fun BoxScope.WineBannerPager(
-	images: List<String>
-) {
-	val pagerState = rememberPagerState()
-
-	Box(
-		modifier = Modifier
-			.fillMaxSize()
-			.align(Alignment.Center),
-		contentAlignment = Alignment.Center
-	) {
-		HorizontalPager(
-			count = images.size,
-			state = pagerState,
-			contentPadding = PaddingValues(horizontal = 46.dp),
-			modifier = Modifier
-				.padding(0.dp)
-				.fillMaxWidth()
-		) { page ->
-			AsyncImage(
-				model = coil.request.ImageRequest.Builder(LocalContext.current)
-					.data(images[page])
-					.crossfade(true)
-					.build(),
-				contentDescription = "",
-				placeholder = painterResource(R.drawable.wine_img_placeholder),
-				contentScale = ContentScale.Fit,
-				modifier = Modifier
-					.graphicsLayer {
-						val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
-						lerp(
-							start = 0.85f,
-							stop = 1f,
-							fraction = 1f - pageOffset.coerceIn(0f, 1f)
-						).also { scale ->
-							scaleX = scale
-							scaleY = scale
-						}
-
-						alpha = lerp(
-							start = 0.5f,
-							stop = 1f,
-							fraction = 1f - pageOffset.coerceIn(0f, 1f)
-						)
-					}
-					.fillMaxSize(),
-			)
-		}
-	}
-}
-
-
-@Composable
-fun WavyLines() {
-	Spacer(Modifier.size(10.dp))
-	Image(
-		painterResource(id = R.drawable.home_wave),
-		contentDescription = "top bar image",
-		contentScale = ContentScale.FillWidth,
-		modifier = Modifier.fillMaxWidth()
-	)
-	Spacer(Modifier.size(10.dp))
-}
-
-@Composable
-fun OtherServices() {
-	Column(
-		modifier = Modifier
-			.fillMaxWidth()
-			.wrapContentHeight()
-	) {
-		Row(
-			modifier = Modifier
-				.fillMaxWidth()
-				.padding(horizontal = 30.dp),
-			horizontalArrangement = Arrangement.Start
-		) {
-			Text(
-				text = "Other Services",
-				color = wine_main,
-				fontWeight = FontWeight.Bold,
-				fontSize = 18.sp
-			)
-		}
-
-		LazyRow() {
-			item { Spacer(Modifier.size(10.dp)) }
-			repeat(4) {
-				item { QCard("와인창고", "현재까지 추천받은 와인들을 모두 모아 보여드려요") }
-			}
-		}
-	}
+        }
+    }
 }
 
 @Composable
 fun QCard(
-	title: String,
-	textContent: String,
-	onButtonClick: () -> Unit = {}
+    title: String,
+    textContent: String,
+    onButtonClick: () -> Unit = {}
 ) {
-	Card(
-		modifier = Modifier
-			.padding(vertical = 20.dp, horizontal = 10.dp)
-			.size(315.dp, 126.dp)
-//			.fillMaxSize(),
-//		elevation = 1.dp,
-		,
-		shape = RoundedCornerShape(2.dp),
-		backgroundColor = white_gray
-	) {
-		Box(
-			modifier = Modifier
-				.padding(15.dp)
-		) {
-			Column(
-				modifier = Modifier.fillMaxWidth(),
-				verticalArrangement = Arrangement.spacedBy(10.dp)
-			) {
-				Row(
-					horizontalArrangement = Arrangement.Start,
-					verticalAlignment = Alignment.CenterVertically
-				) {
-					Icon(
-						painter = painterResource(id = R.drawable.icon_wine_barrel),
-						contentDescription = "wine barrel icon",
-						modifier = Modifier.size(28.dp)
-					)
-
-					Spacer(Modifier.size(15.dp))
-
-					Text(
-						text = title,
-						color = gray_text,
-						fontSize = 14.sp,
-						fontWeight = FontWeight.ExtraBold
-					)
-				}
-
-				Box(modifier = Modifier.fillMaxSize()) {
-					Text(
-						text = textContent,
-						color = gray_text,
-						fontSize = 14.sp,
-						fontWeight = FontWeight.Bold,
-						modifier = Modifier
-							.width(170.dp)
-							.align(Alignment.TopStart)
-					)
-					TextButton(
-						onClick = onButtonClick,
-						colors = ButtonDefaults.buttonColors(
-							backgroundColor = gray_button,
-						),
-						shape = RoundedCornerShape(68.dp),
-						modifier = Modifier
-							.size(96.dp, 32.dp)
-							.align(Alignment.BottomEnd)
-					) {
-						Text(
-							text = title,
-							color = Color.White,
-							fontSize = 14.sp,
-							fontWeight = FontWeight.ExtraBold
-						)
-					}
-				}
-			}
-
-			Row(
-				Modifier.align(Alignment.TopEnd)
-			) {
-				Text(
-					text = "more",
-					color = Color(0xFF929292),
-					fontWeight = FontWeight.Normal,
-					fontSize = 15.sp
-				)
-				Image(
-					painterResource(id = R.drawable.right_double_shift),
-					contentDescription = "placeholder circle image",
-					modifier = Modifier.size(15.dp)
-				)
-			}
-		}
-	}
+    Button(
+        onClick = onButtonClick,
+        shape = RoundedCornerShape(15.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+        elevation = ButtonDefaults.elevation(0.dp),
+        modifier = Modifier
+            .height(85.dp)
+            .width(344.dp)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(50.dp)
+                    .clip(CircleShape)
+                    .background(white_gray)
+            ){
+                when (title) {
+                    "와인 창고" ->
+                        Icon(
+                            painter = painterResource(id = R.drawable.wine_storage_icon),
+                            contentDescription = "",
+                            tint = wine_main,
+                            modifier = Modifier.size(45.dp)
+                        )
+                    "와인 잡지" ->
+                        Icon(
+                            painter = painterResource(id = R.drawable.wine_magazine_icon),
+                            contentDescription = "",
+                            tint = wine_main,
+                            modifier = Modifier.size(32.dp)
+                        )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .width(207.dp)
+                    .padding(start = 16.dp)
+            ) {
+                Text(
+                    text = title,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight(500),
+                    fontFamily = notosanskr,
+                    modifier = Modifier
+                            .padding(bottom = 33.dp)
+                )
+                Text(
+                    text = textContent,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight(500),
+                    fontFamily = notosanskr,
+                    color = gray_button_before,
+                    modifier = Modifier
+                        .padding(top = 35.dp)
+                )
+            }
+            Image(
+                painterResource(id = R.drawable.single_arrow_qcard),
+                contentDescription = "",
+                modifier = Modifier
+                    .padding(start = 27.dp)
+                    .width(7.dp)
+                    .height(22.dp),
+            )
+        }
+    }
 }
 
 
 @Preview
 @Composable
 fun PreviewHome() {
-	HomeScreen()
+    HomeScreen()
 }
