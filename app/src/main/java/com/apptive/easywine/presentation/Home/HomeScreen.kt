@@ -37,7 +37,6 @@ fun HomeScreen(
             .verticalScroll(scrollState)
     ) {
         TextTopBar(title = "EASY WINE",27)
-        Spacer(modifier = Modifier.size(60.dp))
         HomeMainBanner()
         StartAndOtherServices(){
             navController.navigate(Screen.SurveyScreen.route)
@@ -52,61 +51,67 @@ fun HomeMainBanner() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
+            .fillMaxHeight(),
+        contentAlignment = Alignment.Center
     ) {
-        Surface(
+        Image(
+            painterResource(id = R.drawable.wine_banner_image),
+            contentDescription = "",
             modifier = Modifier
-                .fillMaxWidth()
-                .height(310.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.Center)
-            ) {
-                Image(
-                    painterResource(id = R.drawable.wine_img),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .padding(start = 53.dp)
-                        .height(280.dp)
-                        .width(100.dp)
-                )
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .padding(start = 120.dp)
-                        .fillMaxSize()
-                ){
-                    Spacer(Modifier.size(10.dp))
-                    Box(){
-                        Text(
-                            text = "RUBY PORT",
-                            fontSize = 35.sp,
-                            fontWeight = FontWeight(700),
-                            color = wine_title,
-                        )
-                        Text(
-                            text = "Port Wine",
-                            fontSize = 16.sp,
-                            fontFamily = notosanskr,
-                            fontWeight = FontWeight(500),
-                            modifier = Modifier
-                                .padding(top = 35.dp,start = 110.dp)
-                        )
-                    }
-                    Spacer(Modifier.size(15.dp))
-                    Text(
-                        text = "나무통에서 4~5년\n숙성된 와인을\n브랜딩하여 만들어지며,\n루비색을 띈다.",
-                        fontSize = 16.sp,
-                        fontFamily = notosanskr,
-                        color = wine_description,
-                        fontWeight = FontWeight(400),
-                        textAlign = TextAlign.Center
-                    )
-                }
-            }
-        }
-
+                .size(375.dp)
+        )
+//        Surface(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(310.dp)
+//        ) {
+//            Box(
+//                modifier = Modifier
+//                    .align(Alignment.Center)
+//            ) {
+//                Image(
+//                    painterResource(id = R.drawable.wine_img),
+//                    contentDescription = "",
+//                    modifier = Modifier
+//                        .padding(start = 53.dp)
+//                        .height(280.dp)
+//                        .width(100.dp)
+//                )
+//                Column(
+//                    horizontalAlignment = Alignment.CenterHorizontally,
+//                    modifier = Modifier
+//                        .padding(start = 120.dp)
+//                        .fillMaxSize()
+//                ){
+//                    Spacer(Modifier.size(10.dp))
+//                    Box(){
+//                        Text(
+//                            text = "RUBY PORT",
+//                            fontSize = 35.sp,
+//                            fontWeight = FontWeight(700),
+//                            color = wine_title,
+//                        )
+//                        Text(
+//                            text = "Port Wine",
+//                            fontSize = 16.sp,
+//                            fontFamily = notosanskr,
+//                            fontWeight = FontWeight(500),
+//                            modifier = Modifier
+//                                .padding(top = 35.dp,start = 110.dp)
+//                        )
+//                    }
+//                    Spacer(Modifier.size(15.dp))
+//                    Text(
+//                        text = "나무통에서 4~5년\n숙성된 와인을\n브랜딩하여 만들어지며,\n루비색을 띈다.",
+//                        fontSize = 16.sp,
+//                        fontFamily = notosanskr,
+//                        color = wine_description,
+//                        fontWeight = FontWeight(400),
+//                        textAlign = TextAlign.Center
+//                    )
+//                }
+//            }
+//        }
     }
 }
 
@@ -163,8 +168,10 @@ fun StartAndOtherServices(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
             )
-            Spacer(modifier = Modifier.size(3.dp))
-            Box(modifier = Modifier.size(170.dp,90.dp).align(Alignment.BottomCenter), contentAlignment = Alignment.Center){
+            Spacer(modifier = Modifier.size(2.dp))
+            Box(modifier = Modifier
+                .size(170.dp, 90.dp)
+                .align(Alignment.BottomCenter), contentAlignment = Alignment.Center){
                 Button(
                     onClick = onSurveyClick,
                     modifier = Modifier
