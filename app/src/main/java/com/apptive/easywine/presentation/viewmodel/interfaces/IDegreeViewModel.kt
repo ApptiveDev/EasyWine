@@ -6,5 +6,4 @@ import com.apptive.easywine.enums.Side
 
 interface IDegreeViewModel {
     var toDegree: MutableState<Degree>
-    var isAll: MutableState<Side>
 }
