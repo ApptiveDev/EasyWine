@@ -32,6 +32,7 @@ import com.apptive.easywine.presentation.WineStorage.WineStorageViewModel
 import com.apptive.easywine.presentation.viewmodel.DegreeViewModel
 import com.apptive.easywine.presentation.viewmodel.interfaces.IDegreeViewModel
 import com.apptive.easywine.ui.theme.gray_button
+import com.apptive.easywine.ui.theme.notosanskr
 import com.apptive.easywine.ui.theme.wine_button
 
 @Composable
@@ -113,9 +114,10 @@ fun StorageCusttomButton(
         contentAlignment = Alignment.Center
     ){
         Text(
+            fontFamily = notosanskr,
             text = text,
             color = textColor,
-            fontSize = 17.sp,
+            fontSize = 15.sp,
             fontWeight = FontWeight.Medium
         )
     }
