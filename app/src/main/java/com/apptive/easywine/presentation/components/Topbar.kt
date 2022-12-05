@@ -1,5 +1,7 @@
 package com.apptive.easywine.presentation.components
 
+import android.graphics.Paint.Align
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -11,13 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.apptive.easywine.ui.theme.gray_button
-import com.apptive.easywine.ui.theme.gray_button_before
-import com.apptive.easywine.ui.theme.notosanskr
+import com.apptive.easywine.ui.theme.*
 
 
 @Composable
@@ -42,14 +43,16 @@ fun TextTopBar(
 ) {
 	TopBar {
 		Column(
-			modifier = Modifier.align(Alignment.TopEnd)
+			modifier = Modifier
+				.background(color = gray_background)
+				.fillMaxWidth()
+				.height(91.dp)
 		) {
 			Spacer(modifier = Modifier.height(20.dp))
-			Row(
+			Box(
 				modifier = Modifier
-					.padding(end = 9.dp)
 					.fillMaxWidth()
-					.wrapContentSize(Alignment.TopEnd)
+					.fillMaxHeight()
 			) {
 				Text(
 					text = title,
@@ -58,10 +61,15 @@ fun TextTopBar(
 					fontWeight = FontWeight.Medium,
 					color = color,
 					modifier = Modifier
-						.padding(top = 20.dp)
+						.align(Alignment.BottomCenter)
+						.padding(bottom = 6.dp)
 				)
-				Spacer(modifier = Modifier.width(70.dp))
-				IconButton(onClick = { /*TODO*/ }) {
+				IconButton(
+					onClick = { /*TODO*/ },
+					modifier = Modifier
+						.align(Alignment.TopEnd)
+						.padding(end = 22.dp)
+				) {
 					Icon(
 						imageVector = Icons.Filled.Menu,
 						contentDescription = "Menu",
@@ -82,23 +90,32 @@ fun SnackTopBar(
 	color: Color = gray_button
 ){
 	TopBar{
-		Column() {
+		Column(
+			modifier = Modifier
+				.background(color = gray_background)
+				.fillMaxWidth()
+				.height(91.dp)
+		) {
 			Spacer(modifier = Modifier.height(20.dp))
-			Row(
+			Box(
 				modifier = Modifier
 					.fillMaxWidth()
-					.wrapContentSize(Alignment.Center)
+					.fillMaxHeight()
 			) {
-				IconButton(onClick = { /*TODO*/ }) {
+				IconButton(
+					onClick = { /*TODO*/ },
+					modifier = Modifier
+						.align(Alignment.TopStart)
+						.padding(start = 20.dp)
+
+				) {
 					Icon(
 						imageVector = Icons.Filled.KeyboardDoubleArrowLeft,
 						contentDescription = "Menu",
 						tint = gray_button_before,
-						modifier = Modifier
-							.size(45.dp)
+						modifier = Modifier.size(45.dp)
 					)
 				}
-				Spacer(modifier = Modifier.width(70.dp))
 				Text(
 					text = title,
 					fontFamily = notosanskr,
@@ -106,16 +123,22 @@ fun SnackTopBar(
 					fontWeight = FontWeight.Medium,
 					color = color,
 					modifier = Modifier
-						.padding(top = 20.dp)
+						.align(Alignment.BottomCenter)
+						.padding(bottom = 6.dp)
 				)
-				Spacer(modifier = Modifier.width(70.dp))
-				IconButton(onClick = { /*TODO*/ }) {
+				IconButton(
+					onClick = { /*TODO*/ },
+					modifier = Modifier
+						.align(Alignment.TopEnd)
+						.padding(end = 22.dp)
+				) {
 					Icon(
 						imageVector = Icons.Filled.Menu,
 						contentDescription = "Menu",
 						tint = gray_button_before,
 						modifier = Modifier
 							.size(43.dp)
+							.align(Alignment.TopEnd)
 					)
 				}
 			}
@@ -128,8 +151,8 @@ fun SnackTopBar(
 fun PreviewTopBar() {
 	Column {
 		TopBar()
-		TextTopBar(title = "EASY WINE", 27)
-		SnackTopBar(title = "EASY WINE", 27)
+		TextTopBar(title = "오늘의 와인 추천", 18)
+		SnackTopBar(title = "오늘의 와인 추천", 18)
 	}
 
 }
