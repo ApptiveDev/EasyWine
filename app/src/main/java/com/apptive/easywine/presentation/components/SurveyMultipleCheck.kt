@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.apptive.easywine.presentation.viewmodel.mock.MultiCheckButtonViewModel
+import com.apptive.easywine.presentation.viewmodel.MultiCheckButtonViewModel
 import com.apptive.easywine.ui.theme.wine_button
 
 val viewModel = MultiCheckButtonViewModel()

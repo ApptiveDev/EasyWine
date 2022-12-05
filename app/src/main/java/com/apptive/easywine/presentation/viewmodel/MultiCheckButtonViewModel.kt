@@ -1,4 +1,4 @@
-package com.apptive.easywine.presentation.viewmodel.mock
+package com.apptive.easywine.presentation.viewmodel
 
 import androidx.compose.runtime.mutableStateListOf
 
