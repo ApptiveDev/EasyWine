@@ -25,8 +25,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.apptive.easywine.enums.Side
 import com.apptive.easywine.enums.SurveyLevel
+import com.apptive.easywine.presentation.Login.LoginViewModel
 import com.apptive.easywine.presentation.WineStorage.IWineStorageViewModel
 import com.apptive.easywine.presentation.WineStorage.WineStorageViewModel
 import com.apptive.easywine.presentation.viewmodel.DegreeViewModel
@@ -45,12 +47,13 @@ fun StorageButtonContent(){
             .wrapContentSize(Alignment.Center),
         verticalAlignment = Alignment.CenterVertically
     ){
-        StorageButton(StorageViewMode = WineStorageViewModel())
+        val StorageViewMode = viewModel<WineStorageViewModel>()
+        StorageButton(StorageViewMode)
     }
 }
 @Composable
 fun StorageButton(
-    StorageViewMode: IWineStorageViewModel
+    StorageViewMode: WineStorageViewModel
 ){
     var selected = StorageViewMode.isAll
 

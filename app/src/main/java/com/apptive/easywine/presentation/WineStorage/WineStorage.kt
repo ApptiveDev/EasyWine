@@ -23,7 +23,7 @@ import com.apptive.easywine.ui.theme.storage_background
 
 @Preview
 @Composable
-fun SurveyResult(){
+fun WineStorage(){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
