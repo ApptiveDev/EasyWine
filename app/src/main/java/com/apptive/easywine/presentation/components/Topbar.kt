@@ -149,13 +149,37 @@ fun SnackTopBar(
 	}
 }
 
+@Composable
+fun LogoTopBar(
+	title: String,
+	fontSize: Int,
+	color: Color
+){
+	Column(
+		horizontalAlignment = Alignment.CenterHorizontally,
+	){
+		Spacer(modifier = Modifier.height(55.dp))
+		Text(
+			text = title,
+			fontFamily = notosanskr,
+			fontSize = fontSize.sp,
+			fontWeight = FontWeight(824),
+			color = color,
+			modifier = Modifier
+		)
+		Spacer(modifier = Modifier.height(10.dp))
+
+	}
+}
+
 @Preview
 @Composable
 fun PreviewTopBar() {
 	Column {
 		TopBar()
-		//TextTopBar(title = "오늘의 와인 추천", 18)
-		//SnackTopBar(title = "오늘의 와인 추천", 18)
+		TextTopBar(title = "오늘의 와인 추천", 18)
+		SnackTopBar(title = "오늘의 와인 추천", 18)
+		LogoTopBar(title = "EASY WINE", fontSize = 24, color = wine_button)
 	}
 
 }

@@ -27,7 +27,7 @@ import kotlinx.coroutines.CoroutineScope
 
 @Preview
 @Composable
-fun SurveyResult(
+fun WineStorage(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     onClickDrawer: () -> Unit = {},
     scope: CoroutineScope = rememberCoroutineScope()

@@ -5,6 +5,7 @@ import com.apptive.easywine.data.remote.SurveyApi
 import com.apptive.easywine.domain.model.EmailPassword
 import com.apptive.easywine.domain.model.LoginInfo
 import com.apptive.easywine.domain.model.Question
+import com.apptive.easywine.domain.model.UserInfo
 import com.apptive.easywine.domain.repository.MemberRepository
 import com.apptive.easywine.domain.repository.SurveyRepository
 import retrofit2.Response
@@ -15,5 +16,9 @@ class MemberRepositoryImpl @Inject constructor(
 ): MemberRepository {
 	override suspend fun doLogin(emailPassword: EmailPassword): Response<LoginInfo> {
 		return api.doLogin(emailPassword)
+	}
+
+	override suspend fun createAccount(userInfo: UserInfo): Response<UserInfo> {
+		return api.createAccount(userInfo)
 	}
 }
