@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apptive.easywine.domain.model.EmailPassword
 import com.apptive.easywine.domain.model.UserInfo
+import com.apptive.easywine.domain.use_case.member.createAccount
 import com.apptive.easywine.domain.use_case.member.doLogin
 import com.apptive.easywine.domain.util.Resource
 import com.apptive.easywine.domain.util.log
@@ -19,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-	private val doLoginUseCase: doLogin
+	private val doLoginUseCase: doLogin,
+	private val createAccountUseCase: createAccount,
 ): ViewModel() {
 
 	var userInfo: UserInfo by mutableStateOf(
@@ -50,6 +52,23 @@ class LoginViewModel @Inject constructor(
 		}
 	}
 
+	private suspend fun createAccount() {
+		createAccountUseCase(userInfo).collectLatest {
+			when (it) {
+				is Resource.Success -> {
+					_eventFlow.emit(UiEvent.CreateAccount)
+				}
+				is Resource.Error -> {
+					"회원가입 중 에러 발생".log()
+					_eventFlow.emit(UiEvent.Error("cannot login"))
+				}
+				is Resource.Loading -> {
+					"회원가입 중...".log()
+				}
+			}
+		}
+	}
+
 	fun onEvent(event: LoginEvent) {
 		when (event) {
 			is LoginEvent.EnteredEmail -> {
@@ -62,6 +81,22 @@ class LoginViewModel @Inject constructor(
 					pass = event.value
 				)
 			}
+
+			is LoginEvent.EnteredAge -> {
+				userInfo = userInfo.copy(
+					age = event.value
+				)
+			}
+			is LoginEvent.EnteredGender -> {
+				userInfo = userInfo.copy(
+					gender = 0 // TODO - fix
+				)
+			}
+			is LoginEvent.EnteredName -> {
+				userInfo = userInfo.copy(
+					name = event.value
+				)
+			}
 			is LoginEvent.Login -> {
 				viewModelScope.launch {
 					try {
@@ -72,10 +107,30 @@ class LoginViewModel @Inject constructor(
 							_eventFlow.emit(UiEvent.Error(message = "모든 칸의 내용을 채워주세요"))
 							return@launch
 						}
-						 login()
+						login()
 					} catch (e: Exception) {
 						"로그인 중 에러 발생".log()
 						_eventFlow.emit(UiEvent.Error(message = "로그인 중 에러 발생"))
+					}
+				}
+			}
+			is LoginEvent.CreateAccount -> {
+				viewModelScope.launch {
+					try {
+						if (userInfo.email.isBlank()
+							|| userInfo.pass.isBlank()
+							|| userInfo.age.toString().isBlank()
+							|| userInfo.gender.toString().isBlank()
+							|| userInfo.name.isBlank()
+						) {
+							"ERROR 입력 되지 않은 칸이 존재".log()
+							_eventFlow.emit(UiEvent.Error(message = "모든 칸의 내용을 채워주세요"))
+							return@launch
+						}
+						createAccount()
+					} catch (e: Exception) {
+						"계정생성 중 에러 발생".log()
+						_eventFlow.emit(UiEvent.Error(message = "계정생성 중 에러 발생"))
 					}
 				}
 			}
@@ -86,5 +141,7 @@ class LoginViewModel @Inject constructor(
 	sealed class UiEvent {
 		data class Error(val message: String) : UiEvent()
 		object Login : UiEvent()
+		object SignUp : UiEvent()
+		object CreateAccount : UiEvent()
 	}
 }
