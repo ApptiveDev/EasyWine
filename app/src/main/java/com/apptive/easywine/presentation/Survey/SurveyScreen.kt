@@ -6,8 +6,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,18 +24,21 @@ import com.apptive.easywine.domain.model.Question
 import com.apptive.easywine.enums.SurveyLevel
 import com.apptive.easywine.presentation.components.*
 import com.apptive.easywine.ui.theme.gray_button_before
+import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun SurveyScreen(
 	navController: NavController = rememberNavController(),
 	surveyViewModel: SurveyViewModel = hiltViewModel(),
+	scaffoldState: ScaffoldState = rememberScaffoldState(),
+	scope: CoroutineScope = rememberCoroutineScope()
 ) {
 	Column(
 		horizontalAlignment = Alignment.CenterHorizontally,
 		modifier = Modifier
 			.background(Color.White)
 	) {
-		SnackTopBar(title = "오늘의 와인 추천", 18)
+		SnackTopBar(title = "오늘의 와인 추천", fontSize = 18, scope = scope, scaffoldState = scaffoldState,)
 
 		/* just for test 
 		Button(

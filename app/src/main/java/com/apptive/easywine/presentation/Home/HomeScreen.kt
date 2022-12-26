@@ -1,11 +1,13 @@
 package com.apptive.easywine.presentation.Home
 
+import androidx.annotation.RestrictTo
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,13 +24,20 @@ import com.apptive.easywine.R
 import com.apptive.easywine.presentation.components.TextTopBar
 import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.ui.theme.*
+import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun HomeScreen(
     navController: NavController = rememberNavController(),
+    scrollState: ScrollState = rememberScrollState(),
+    scaffoldState: ScaffoldState = rememberScaffoldState(),
+    scope: CoroutineScope = rememberCoroutineScope()
+
 ) {
 
-    val scrollState = rememberScrollState()
+//    val scrollState = rememberScrollState()
+//    val scaffoldState = rememberScaffoldState()
+//    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -36,7 +45,7 @@ fun HomeScreen(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        TextTopBar(title = "EASY WINE",27)
+        TextTopBar(title = "EASY WINE", fontSize = 27, scope = scope, scaffoldState = scaffoldState,)
         HomeMainBanner()
         StartAndOtherServices(){
             navController.navigate(Screen.SurveyScreen.route)
