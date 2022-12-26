@@ -7,6 +7,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
@@ -34,14 +35,13 @@ fun LoginButton(
     color: Color,
     onClick: () -> Unit = {},
 ) {
-    Box(
+    TextButton(
+        onClick = onClick,
         modifier = modifier
             .width(305.dp)
             .height(47.dp)
             .clip(RoundedCornerShape(15))
             .background(color = color)
-            .clickable { onClick() },
-        contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
@@ -59,14 +59,14 @@ fun SocialLoginButton(
     size: Dp,
     icon: Int
 ){
-    Button(
+    TextButton(
+        onClick = onClick,
         modifier = Modifier
         .width(75.dp)
         .height(50.dp),
         shape = RoundedCornerShape(15),
         colors = ButtonDefaults.buttonColors(color),
         elevation =  ButtonDefaults.elevation(2.dp),
-        onClick = onClick
     ) {
         Image(
             modifier = Modifier

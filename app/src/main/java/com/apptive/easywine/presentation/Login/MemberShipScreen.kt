@@ -18,50 +18,50 @@ import com.apptive.easywine.presentation.components.LogoTopBar
 import com.apptive.easywine.ui.theme.gray_button_before
 import com.apptive.easywine.ui.theme.wine_button
 
-@Composable
-fun MemberShip(){
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-            .verticalScroll(rememberScrollState())
-    ){
-        val LoginViewMode = viewModel<LoginViewModel>()
-        LogoTopBar(title = "EASY WINE", fontSize = 24, color = wine_button)
-        Spacer(modifier = Modifier.height(90.dp))
-        BasicInfoBox("Name", LoginViewMode.accountName)
-        Spacer(modifier = Modifier.height(30.dp))
-        BasicInfoBox("ID", LoginViewMode.accountId)
-        Spacer(modifier = Modifier.height(30.dp))
-        PasswordBox("Password", LoginViewMode.accountPw)
-        Spacer(modifier = Modifier.height(30.dp))
-        BasicInfoBox("Email", LoginViewMode.accountEmail)
-        Spacer(modifier = Modifier.height(40.dp))
-        LoginButton(Modifier, "Create Account", wine_button, {})
-        Spacer(modifier = Modifier.height(80.dp))
-        SocialLoginContent()
-        Spacer(modifier = Modifier.height(30.dp))
-        Row(){
-            Text(
-                text = "Don't have an account?",
-                fontSize = 13.sp,
-                color = gray_button_before
-            )
-            Text(
-                modifier = Modifier.clickable { },
-                text = "Sign up",
-                fontSize = 13.sp,
-                color = wine_button
-            )
-        }
-        Spacer(modifier = Modifier.height(30.dp))
-    }
-}
+//@Composable
+//fun MemberShip(){
+//    Column(
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .background(Color.White)
+//            .verticalScroll(rememberScrollState())
+//    ){
+//        val LoginViewMode = viewModel<LoginViewModel>()
+//        LogoTopBar(title = "EASY WINE", fontSize = 24, color = wine_button)
+//        Spacer(modifier = Modifier.height(90.dp))
+//        BasicInfoBox("Name", LoginViewMode.accountName)
+//        Spacer(modifier = Modifier.height(30.dp))
+//        BasicInfoBox("ID", LoginViewMode.accountId)
+//        Spacer(modifier = Modifier.height(30.dp))
+//        PasswordBox("Password", LoginViewMode.accountPw)
+//        Spacer(modifier = Modifier.height(30.dp))
+//        BasicInfoBox("Email", LoginViewMode.accountEmail)
+//        Spacer(modifier = Modifier.height(40.dp))
+//        LoginButton(Modifier, "Create Account", wine_button, {})
+//        Spacer(modifier = Modifier.height(80.dp))
+//        SocialLoginContent()
+//        Spacer(modifier = Modifier.height(30.dp))
+//        Row(){
+//            Text(
+//                text = "Don't have an account?",
+//                fontSize = 13.sp,
+//                color = gray_button_before
+//            )
+//            Text(
+//                modifier = Modifier.clickable { },
+//                text = "Sign up",
+//                fontSize = 13.sp,
+//                color = wine_button
+//            )
+//        }
+//        Spacer(modifier = Modifier.height(30.dp))
+//    }
+//}
 
 @Preview
 @Composable
 fun PreviewMemberShip() {
-    MemberShip()
+//    MemberShip()
 }
 

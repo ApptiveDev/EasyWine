@@ -19,20 +19,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.apptive.easywine.ui.theme.gray_button_before
-import androidx.lifecycle.viewmodel.compose.viewModel
-
-//코드 작동 확인을 위한 예시 (ID)
-//@Composable
-//fun IdBox(
-//    LoginViewMode: LoginViewModel
-//) {
-//    BasicInfoBox("ID", LoginViewMode.accountId)
-//}
 
 @Composable
 fun BasicInfoBox(
     type: String,
-    text: MutableState<String>
+    text: String,
+    onValueChange: (String) -> Unit = {},
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
 ){
     Surface(
         elevation = 5.dp,
@@ -43,10 +36,8 @@ fun BasicInfoBox(
                 .width(305.dp)
                 .height(48.dp)
                 .padding(0.dp),
-            value = text.value,
-            onValueChange = { newText ->
-                text.value = newText
-            },
+            value = text,
+            onValueChange = onValueChange,
             singleLine = true,
             placeholder = {Text(text = type, fontSize = 14.sp)},
             colors = TextFieldDefaults.textFieldColors(
@@ -56,7 +47,8 @@ fun BasicInfoBox(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 backgroundColor = Color.White
-            )
+            ),
+            keyboardOptions = keyboardOptions,
         )
     }
 }
@@ -64,7 +56,8 @@ fun BasicInfoBox(
 @Composable
 fun PasswordBox(
     type: String,
-    text: MutableState<String>
+    text: String,
+    onValueChange: (String) -> Unit = {},
 ){
     Surface(
         elevation = 5.dp,
@@ -73,16 +66,16 @@ fun PasswordBox(
         var passwordVisible by remember { mutableStateOf(false) }
 
         TextField(
+            value = text,
+            onValueChange = onValueChange,
             modifier = Modifier
                 .width(305.dp)
                 .height(48.dp)
                 .padding(0.dp),
-            value = text.value,
-            onValueChange = { newText ->
-                text.value = newText
-            },
             singleLine = true,
-            placeholder = {Text(text = type, fontSize = 14.sp)},
+            placeholder = {
+                Text(text = type, fontSize = 14.sp)
+            },
             colors = TextFieldDefaults.textFieldColors(
                 textColor = Color.Black,
                 cursorColor = Color.Black,
@@ -94,15 +87,13 @@ fun PasswordBox(
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             trailingIcon = {
-                val image = if (passwordVisible)
-                    Icons.Filled.Visibility
-                else Icons.Filled.VisibilityOff
-
+                val image = if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
                 val description = if (passwordVisible) "Hide password" else "Show password"
+
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
                     Icon(imageVector = image, description)
                 }
-            }
+            },
         )
     }
 }
