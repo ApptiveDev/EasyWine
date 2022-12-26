@@ -34,7 +34,7 @@ fun SurveyResult(
             .fillMaxSize()
             .background(Color.White)
     ){
-        SnackTopBar(title = "오늘의 와인 확인하기",18,scope = scope, onClickDrawer = onClickDrawer)
+        SnackTopBar(title = "오늘의 와인 확인하기",18, onClickDrawer = onClickDrawer)
         Spacer(Modifier.size(90.dp))
         SurveyResultContent()
     }

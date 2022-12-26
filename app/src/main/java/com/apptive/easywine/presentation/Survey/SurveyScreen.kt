@@ -38,7 +38,7 @@ fun SurveyScreen(
 		modifier = Modifier
 			.background(Color.White)
 	) {
-		SnackTopBar(title = "오늘의 와인 추천", fontSize = 18, scope = scope, onClickDrawer = onClickDrawer)
+		SnackTopBar(title = "오늘의 와인 추천", fontSize = 18, onClickDrawer = onClickDrawer)
 
 		/* just for test 
 		Button(

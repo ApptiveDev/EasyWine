@@ -89,7 +89,6 @@ fun SnackTopBar(
 	title: String,
 	fontSize: Int,
 	color: Color = gray_button,
-	scope: CoroutineScope,
 	onClickDrawer: () -> Unit = {},
 ){
 	TopBar{
@@ -177,9 +176,9 @@ fun LogoTopBar(
 fun PreviewTopBar() {
 	Column {
 		TopBar()
-		TextTopBar(title = "오늘의 와인 추천", 18)
-		SnackTopBar(title = "오늘의 와인 추천", 18)
-		LogoTopBar(title = "EASY WINE", fontSize = 24, color = wine_button)
+//		TextTopBar(title = "오늘의 와인 추천", 18)
+//		SnackTopBar(title = "오늘의 와인 추천", 18)
+//		LogoTopBar(title = "EASY WINE", fontSize = 24, color = wine_button)
 	}
 
 }
