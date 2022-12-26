@@ -29,8 +29,8 @@ import kotlinx.coroutines.CoroutineScope
 @Composable
 fun HomeScreen(
     navController: NavController = rememberNavController(),
+    onClickDrawer: () -> Unit = {},
     scrollState: ScrollState = rememberScrollState(),
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
     scope: CoroutineScope = rememberCoroutineScope()
 
 ) {
@@ -45,7 +45,7 @@ fun HomeScreen(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        TextTopBar(title = "EASY WINE", fontSize = 27, scope = scope, scaffoldState = scaffoldState,)
+        TextTopBar(title = "EASY WINE", fontSize = 27, scope = scope, onClickDrawer = onClickDrawer)
         HomeMainBanner()
         StartAndOtherServices(){
             navController.navigate(Screen.SurveyScreen.route)

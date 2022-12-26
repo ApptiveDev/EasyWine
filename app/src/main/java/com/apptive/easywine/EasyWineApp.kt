@@ -20,7 +20,7 @@ fun EasyWineApp() {
 
 	EasyWineTheme {
 		Scaffold(
-			scaffoldState = rememberScaffoldState(),
+			scaffoldState = scaffoldState,
 			bottomBar = {},
 			drawerContent = {
 				NavigationDrawer(
@@ -39,7 +39,12 @@ fun EasyWineApp() {
 				startDestination = Screen.LoginScreen.route,
 			) {
 				easyWineGraph(
-					navController = navController
+					navController = navController,
+					onClickDrawer = {
+						scope.launch {
+							scaffoldState.drawerState.open()
+						}
+					}
 				)
 			}
 			it
