@@ -90,7 +90,7 @@ fun SnackTopBar(
 	fontSize: Int,
 	color: Color = gray_button,
 	scope: CoroutineScope,
-	scaffoldState: ScaffoldState,
+	onClickDrawer: () -> Unit = {},
 ){
 	TopBar{
 		Column(
@@ -130,11 +130,7 @@ fun SnackTopBar(
 						.padding(bottom = 6.dp)
 				)
 				IconButton(
-					onClick = {
-						scope.launch {
-							scaffoldState.drawerState.open()
-						}
-					},
+					onClick = onClickDrawer,
 					modifier = Modifier
 						.align(Alignment.TopEnd)
 						.padding(end = 22.dp)

@@ -29,6 +29,7 @@ import kotlinx.coroutines.CoroutineScope
 @Composable
 fun SurveyResult(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
+    onClickDrawer: () -> Unit = {},
     scope: CoroutineScope = rememberCoroutineScope()
 ){
     Column(
@@ -38,7 +39,7 @@ fun SurveyResult(
             .background(storage_background)
             .verticalScroll(rememberScrollState())
     ){
-        SnackTopBar(title = "와인창고",18,scope = scope, scaffoldState = scaffoldState,)
+        SnackTopBar(title = "와인창고",18,scope = scope, onClickDrawer = onClickDrawer)
         StorageButtonContent()
         StorageDate("11/01")
         Spacer(Modifier.height(20.dp))

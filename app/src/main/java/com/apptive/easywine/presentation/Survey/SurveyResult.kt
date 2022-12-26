@@ -25,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 @Composable
 fun SurveyResult(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
+    onClickDrawer: () -> Unit = {},
     scope: CoroutineScope = rememberCoroutineScope()
 ){
     Column(
@@ -33,7 +34,7 @@ fun SurveyResult(
             .fillMaxSize()
             .background(Color.White)
     ){
-        SnackTopBar(title = "오늘의 와인 확인하기",18,scope = scope, scaffoldState = scaffoldState,)
+        SnackTopBar(title = "오늘의 와인 확인하기",18,scope = scope, onClickDrawer = onClickDrawer)
         Spacer(Modifier.size(90.dp))
         SurveyResultContent()
     }
