@@ -22,11 +22,11 @@ fun EasyWineApp() {
 	val scope = rememberCoroutineScope()
 
 	EasyWineTheme {
-		CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl){
 			Scaffold(
 				scaffoldState = scaffoldState,
 				bottomBar = {},
 				drawerContent = {
+
 					NavigationDrawer(
 						currentScreen = Screen.HomeScreen
 					) {
@@ -53,6 +53,5 @@ fun EasyWineApp() {
 				}
 				it
 			}
-		}
 	}
 }

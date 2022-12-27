@@ -1,29 +1,21 @@
 package com.apptive.easywine.presentation.components
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.apptive.easywine.presentation.navgation.Screen
-import com.apptive.easywine.ui.theme.gray_background
-import com.apptive.easywine.ui.theme.gray_button_before
-import com.apptive.easywine.ui.theme.notosanskr
-import com.apptive.easywine.ui.theme.wine_button
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.apptive.easywine.ui.theme.*
+
 
 @Composable
 fun NavigationDrawer(
@@ -31,7 +23,7 @@ fun NavigationDrawer(
     itemClick: (String) -> Unit
 ) {
     val menuList = createDrawerItem(currentScreen)
-
+    
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -82,7 +74,7 @@ fun NavigationMenuItem(
     itemClick: () -> Unit
 ) {
     val texColor = if (item.isSelected) Color.White else gray_button_before
-    val backgroundColor = if (item.isSelected) wine_button else Color.Transparent
+    val backgroundColor = if (item.isSelected) gray_button_before else Color.Transparent
 
     Surface(
         modifier = Modifier
