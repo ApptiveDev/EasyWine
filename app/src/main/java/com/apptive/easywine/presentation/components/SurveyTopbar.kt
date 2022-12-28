@@ -212,7 +212,6 @@ fun BottomShadow(
 
 @Composable
 fun SurveyTopbar(
-	percent: Float,
 	level: SurveyLevel,
 ) {
 	Column(
@@ -222,7 +221,7 @@ fun SurveyTopbar(
 		horizontalAlignment = Alignment.CenterHorizontally,
 	) {
 		Spacer(modifier = Modifier.height(20.dp))
-		SurveyProgressBar(prog_percent = percent)
+		SurveyProgressBar(prog_percent = level.percent)
 		Spacer(modifier = Modifier.height(30.dp))
 		Row(
 			verticalAlignment = Alignment.CenterVertically
@@ -249,7 +248,7 @@ fun SurveyTopbar(
 @Composable
 fun PreviewSurveyTopbar() {
 	Column {
-		SurveyTopbar(0.7F, SurveyLevel.MOOD)
+//		SurveyTopbar(0.7F, SurveyLevel.MOOD)
 	}
 }
 

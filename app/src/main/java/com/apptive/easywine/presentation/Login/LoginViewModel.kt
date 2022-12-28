@@ -133,7 +133,6 @@ class LoginViewModel @Inject constructor(
 				userInfo = userInfo.copy(gender = if(event.value) 1 else 0)
 			}
 		}
-
 	}
 
 	sealed class UiEvent {

@@ -3,7 +3,6 @@ package com.apptive.easywine.presentation.Login
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 
 import androidx.compose.material.Text
@@ -17,14 +16,11 @@ import androidx.compose.ui.unit.sp
 import com.apptive.easywine.ui.theme.notosanskr
 import com.apptive.easywine.ui.theme.wine_button
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.apptive.easywine.R
-import com.apptive.easywine.presentation.components.SurveyYesOrNo
 import com.apptive.easywine.ui.theme.gray_button_before
 import com.apptive.easywine.ui.theme.gray_line
 

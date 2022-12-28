@@ -13,5 +13,7 @@ data class StorageWine(
 	var country : String = "",
 	var type : String = "",
 	var alcohol : String = "",
+	var localDate : String = "",
+	var localTime : String = "",
 	var _like: Boolean = false,
 )

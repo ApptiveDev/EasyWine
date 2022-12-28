@@ -2,10 +2,12 @@ package com.apptive.easywine.data.remote
 
 import com.apptive.easywine.domain.model.Question
 import com.apptive.easywine.domain.model.RecommendBody
+import com.apptive.easywine.domain.model.StorageWine
 import com.apptive.easywine.domain.model.Wine
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface SurveyApi {
 
@@ -24,8 +26,8 @@ interface SurveyApi {
 	suspend fun getQuestion3(
 	): Response<List<Question>>
 
-	@GET("/question/answer/v2")
+	@POST("/question/answer/v2")
 	suspend fun getRecommend(
 		@Body recommendBody: RecommendBody
-	): Response<Wine>
+	): Response<StorageWine>
 }
