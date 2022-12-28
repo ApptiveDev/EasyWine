@@ -30,6 +30,7 @@ import kotlinx.coroutines.CoroutineScope
 @Preview
 @Composable
 fun WineStorage(
+    navController: NavController = rememberNavController(),
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     onClickDrawer: () -> Unit = {},
     scope: CoroutineScope = rememberCoroutineScope(),

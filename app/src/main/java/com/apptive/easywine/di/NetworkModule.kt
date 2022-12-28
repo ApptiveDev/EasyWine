@@ -4,6 +4,7 @@ import android.util.Log
 import com.apptive.easywine._const.NetworkConst.BASE_URL
 import com.apptive.easywine.data.remote.MemberApi
 import com.apptive.easywine.data.remote.SurveyApi
+import com.apptive.easywine.data.remote.WineStorageApi
 import com.apptive.easywine.data.repository.MemberRepositoryImpl
 import com.apptive.easywine.data.repository.SurveyRepositoryImpl
 import com.apptive.easywine.domain.repository.MemberRepository
@@ -83,21 +84,14 @@ object NetworkModule {
 
 	@Provides
 	@Singleton
-	fun provideSurveyRepository(api: SurveyApi): SurveyRepository {
-		return SurveyRepositoryImpl(api)
-	}
-
-
-	@Provides
-	@Singleton
 	fun provideMemberApi(retrofit: Retrofit): MemberApi {
 		return retrofit.create(MemberApi::class.java)
 	}
 
 	@Provides
 	@Singleton
-	fun provideMemberRepository(api: MemberApi): MemberRepository {
-		return MemberRepositoryImpl(api)
+	fun provideWineStorageApi(retrofit: Retrofit): WineStorageApi {
+		return retrofit.create(WineStorageApi::class.java)
 	}
 
 }
