@@ -18,42 +18,33 @@ import com.apptive.easywine.ui.theme.notosanskr
 
 @Composable
 fun StorageDate(
-    date: String
+    month: String,
+    day : String,
+    hour: String,
+    minute: String
 ){
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp)
-            .background(color = Color.White),
-        shape = RectangleShape,
-        elevation = 3.dp
+    Row(
+        modifier = Modifier.height(35.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp)
-                .background(color = Color.White),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Spacer(modifier = Modifier.width(10.dp))
-            Text(
-                text = date,
-                fontFamily = notosanskr,
-                fontSize = 15.sp
-            )
-            Spacer(modifier = Modifier.width(3.dp))
-            Text(
-                text = "추천받은 와인",
-                fontFamily = notosanskr,
-                fontSize = 15.sp
-            )
-        }
+        Spacer(modifier = Modifier.width(10.dp))
+        Text(
+            text = month + "/" + day,
+            fontFamily = notosanskr,
+            fontSize = 15.sp
+        )
+        Spacer(modifier = Modifier.width(5.dp))
+        Text(
+            text = hour + ":" + minute,
+            fontFamily = notosanskr,
+            fontSize = 15.sp
+        )
     }
 }
 
 @Preview
 @Composable
 fun PreviewStorageDate() {
-    StorageDate("11/01")
+    StorageDate("11", "01", "13", "57")
 }
 
