@@ -36,6 +36,6 @@ fun NavGraphBuilder.easyWineGraph(
 	}
 
 	composable(Screen.StorageScreen.route) {
-		WineStorage()
+		WineStorage(navController)
 	}
 }

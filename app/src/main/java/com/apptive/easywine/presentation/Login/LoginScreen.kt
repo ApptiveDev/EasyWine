@@ -99,17 +99,17 @@ fun LoginScreen(
 			text = viewModel.userInfo.pass,
 			onValueChange = { viewModel.onEvent(LoginEvent.EnteredPassword(it)) },
 		)
-		Spacer(modifier = Modifier.height(10.dp))
-
-		Row {
-			Spacer(modifier = Modifier.width(189.dp))
-			Text(
-				modifier = Modifier.clickable { },
-				text = "Forgot Password ?",
-				fontSize = 14.sp,
-				color = gray_button_before
-			)
-		}
+//		Spacer(modifier = Modifier.height(10.dp))
+//
+//		Row {
+//			Spacer(modifier = Modifier.width(189.dp))
+//			Text(
+//				modifier = Modifier.clickable { },
+//				text = "Forgot Password ?",
+//				fontSize = 14.sp,
+//				color = gray_button_before
+//			)
+//		}
 		Spacer(modifier = Modifier.height(30.dp))
 
 		if (isSignUpMode) {
@@ -123,7 +123,7 @@ fun LoginScreen(
 			Spacer(modifier = Modifier.height(30.dp))
 			Row {
 				GenderBox() { viewModel.onEvent(LoginEvent.EnterGender(it)) }
-				Spacer(modifier = Modifier.width(18.dp))
+				Spacer(modifier = Modifier.width(22.dp))
 				BasicInfoBox(
 					width = 118.dp,
 					height = 50.dp,
