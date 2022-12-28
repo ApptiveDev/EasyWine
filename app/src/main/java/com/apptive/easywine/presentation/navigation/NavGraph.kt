@@ -8,6 +8,7 @@ import com.apptive.easywine.presentation.Home.HomeScreen
 import com.apptive.easywine.presentation.Home.WineStorage
 import com.apptive.easywine.presentation.Login.LoginScreen
 import com.apptive.easywine.presentation.Survey.SurveyScreen
+import com.apptive.easywine.presentation.Survey.SurveyYesOrNoScreen
 
 fun NavGraphBuilder.easyWineGraph(
 	navController: NavController,
@@ -27,7 +28,11 @@ fun NavGraphBuilder.easyWineGraph(
 	}
 
 	composable(Screen.SurveyScreen.route) {
-		SurveyScreen(navController)
+		SurveyScreen(navController = navController, onClickDrawer = onClickDrawer)
+	}
+
+	composable(Screen.SurveyYesOrNoScreen.route) {
+		SurveyYesOrNoScreen(navController)
 	}
 
 	composable(Screen.StorageScreen.route) {

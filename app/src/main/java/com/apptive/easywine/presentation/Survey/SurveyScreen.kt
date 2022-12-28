@@ -23,6 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.apptive.easywine.domain.model.Question
 import com.apptive.easywine.enums.SurveyLevel
 import com.apptive.easywine.presentation.components.*
+import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.ui.theme.gray_button_before
 import kotlinx.coroutines.CoroutineScope
 
@@ -50,12 +51,13 @@ fun SurveyScreen(
 		*/
 
 		SurveyMainContent(
-            0.7F,
+			0.7F,
 			surveyViewModel.level,
             "오늘의 와인을 위한 ",
             "바디감 ",
             "질문이에요.",
-            surveyViewModel.questions1
+            surveyViewModel.questions1,
+			navController
         )
 	}
 }
@@ -68,6 +70,7 @@ fun SurveyMainContent(
 	condition: String,
 	title_back: String,
 	questions1: List<Question>,
+	navController: NavController = rememberNavController(),
 ) {
 	val scrollState = rememberScrollState()
 	Column() {
@@ -90,22 +93,26 @@ fun SurveyMainContent(
 				}
 			}
 			item {
-				SurveyBottomButton()
+				SurveyBottomButton(){
+					navController.navigate(Screen.SurveyYesOrNoScreen.route)
+				}
 			}
 		}
 	}
 }
 
 @Composable
-fun SurveyBottomButton() {
+fun SurveyBottomButton(
+	nextSurveyClick : () -> Unit,
+) {
 	Column(
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
 		Spacer(modifier = Modifier.height(25.dp))
 		Row {
-			PageNav(isLeft = true)
+			PageNav(isLeft = true,)
 			Spacer(modifier = Modifier.size(30.dp))
-			PageNav(isLeft = false)
+			PageNav(isLeft = false, nextSurveyClick = nextSurveyClick)
 		}
 		ResultButton(
 			text = "오늘의 와인 확인하기",

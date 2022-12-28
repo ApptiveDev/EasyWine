@@ -13,12 +13,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.ui.theme.*
 
 
 @Composable
 fun NavigationDrawer(
+//    navController: NavController,
     currentScreen: Screen,
     itemClick: (String) -> Unit
 ) {
@@ -60,11 +63,14 @@ data class NavigationDrawerItem(
 
 @Composable
 private fun DrawerBody(
+//    navController: NavController = rememberNavController(),
     item: NavigationDrawerItem,
     itemClick: (String) -> Unit,
 ) {
     NavigationMenuItem(item = item) {
         itemClick(item.title)
+//        var goto = item.title
+//        navController.navigate(Screen.goto.route)
     }
 }
 
