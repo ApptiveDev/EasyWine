@@ -1,5 +1,6 @@
 package com.apptive.easywine.presentation.Home
 
+import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -10,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -19,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.apptive.easywine.R
+import com.apptive.easywine.domain.util.log
 import com.apptive.easywine.presentation.components.TextTopBar
 import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.ui.theme.*
@@ -38,9 +41,10 @@ fun HomeScreen(
     ) {
         TextTopBar(title = "EASY WINE",27)
         HomeMainBanner()
-        StartAndOtherServices(){
-            navController.navigate(Screen.SurveyScreen.route)
-        }
+        StartAndOtherServices(
+            onSurveyClick = {navController.navigate(Screen.SurveyScreen.route)},
+            onWineStorageClick = {navController.navigate(Screen.StorageScreen.route)}
+        )
     }
 
 
@@ -119,6 +123,7 @@ fun HomeMainBanner() {
 @Composable
 fun StartAndOtherServices(
     onSurveyClick : () -> Unit,
+    onWineStorageClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -149,9 +154,14 @@ fun StartAndOtherServices(
                 )
             }
             Spacer(Modifier.size(15.dp))
-            QCard("와인 창고", "현재까지 추천받은 와인들")
+            QCard("와인 창고", "현재까지 추천받은 와인들") {
+                onWineStorageClick()
+            }
             Spacer(Modifier.size(20.dp))
-            QCard("와인 잡지", "와인에 대한 어떤 것")
+            val context  = LocalContext.current
+            QCard("와인 잡지", "와인에 대한 어떤 것"){
+                Toast.makeText(context, "서비스 준비 중입니다.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         Box(
@@ -198,7 +208,7 @@ fun StartAndOtherServices(
 fun QCard(
     title: String,
     textContent: String,
-    onButtonClick: () -> Unit = {}
+    onButtonClick: () -> Unit = {},
 ) {
     Button(
         onClick = onButtonClick,
