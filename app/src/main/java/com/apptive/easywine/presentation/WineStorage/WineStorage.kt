@@ -5,7 +5,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,12 +24,16 @@ import com.apptive.easywine.presentation.components.StorageWineList
 import com.apptive.easywine.presentation.viewmodel.DegreeViewModel
 import com.apptive.easywine.ui.theme.gray_background
 import com.apptive.easywine.ui.theme.storage_background
+import kotlinx.coroutines.CoroutineScope
 
 
 @Preview
 @Composable
 fun WineStorage(
-    navController: NavController = rememberNavController()
+    navController: NavController = rememberNavController(),
+    scaffoldState: ScaffoldState = rememberScaffoldState(),
+    onClickDrawer: () -> Unit = {},
+    scope: CoroutineScope = rememberCoroutineScope()
 ){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -35,7 +42,7 @@ fun WineStorage(
             .background(storage_background)
             .verticalScroll(rememberScrollState())
     ){
-        SnackTopBar(title = "와인창고",18)
+        SnackTopBar(title = "와인창고",18, onClickDrawer = onClickDrawer)
         StorageButtonContent()
         StorageDate("11/01")
         Spacer(Modifier.height(20.dp))

@@ -1,12 +1,15 @@
 package com.apptive.easywine.presentation.Home
 
+
 import android.widget.Toast
+import androidx.annotation.RestrictTo
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,13 +28,20 @@ import com.apptive.easywine.domain.util.log
 import com.apptive.easywine.presentation.components.TextTopBar
 import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.ui.theme.*
+import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun HomeScreen(
     navController: NavController = rememberNavController(),
+    onClickDrawer: () -> Unit = {},
+    scrollState: ScrollState = rememberScrollState(),
+    scope: CoroutineScope = rememberCoroutineScope()
+
 ) {
 
-    val scrollState = rememberScrollState()
+//    val scrollState = rememberScrollState()
+//    val scaffoldState = rememberScaffoldState()
+//    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -39,7 +49,7 @@ fun HomeScreen(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        TextTopBar(title = "EASY WINE",27)
+        TextTopBar(title = "EASY WINE", fontSize = 27, scope = scope, onClickDrawer = onClickDrawer)
         HomeMainBanner()
         StartAndOtherServices(
             onSurveyClick = {navController.navigate(Screen.SurveyScreen.route)},
@@ -64,58 +74,6 @@ fun HomeMainBanner() {
             modifier = Modifier
                 .size(375.dp)
         )
-//        Surface(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(310.dp)
-//        ) {
-//            Box(
-//                modifier = Modifier
-//                    .align(Alignment.Center)
-//            ) {
-//                Image(
-//                    painterResource(id = R.drawable.wine_img),
-//                    contentDescription = "",
-//                    modifier = Modifier
-//                        .padding(start = 53.dp)
-//                        .height(280.dp)
-//                        .width(100.dp)
-//                )
-//                Column(
-//                    horizontalAlignment = Alignment.CenterHorizontally,
-//                    modifier = Modifier
-//                        .padding(start = 120.dp)
-//                        .fillMaxSize()
-//                ){
-//                    Spacer(Modifier.size(10.dp))
-//                    Box(){
-//                        Text(
-//                            text = "RUBY PORT",
-//                            fontSize = 35.sp,
-//                            fontWeight = FontWeight(700),
-//                            color = wine_title,
-//                        )
-//                        Text(
-//                            text = "Port Wine",
-//                            fontSize = 16.sp,
-//                            fontFamily = notosanskr,
-//                            fontWeight = FontWeight(500),
-//                            modifier = Modifier
-//                                .padding(top = 35.dp,start = 110.dp)
-//                        )
-//                    }
-//                    Spacer(Modifier.size(15.dp))
-//                    Text(
-//                        text = "나무통에서 4~5년\n숙성된 와인을\n브랜딩하여 만들어지며,\n루비색을 띈다.",
-//                        fontSize = 16.sp,
-//                        fontFamily = notosanskr,
-//                        color = wine_description,
-//                        fontWeight = FontWeight(400),
-//                        textAlign = TextAlign.Center
-//                    )
-//                }
-//            }
-//        }
     }
 }
 

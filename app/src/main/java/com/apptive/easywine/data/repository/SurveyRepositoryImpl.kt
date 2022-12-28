@@ -2,6 +2,8 @@ package com.apptive.easywine.data.repository
 
 import com.apptive.easywine.data.remote.SurveyApi
 import com.apptive.easywine.domain.model.Question
+import com.apptive.easywine.domain.model.RecommendBody
+import com.apptive.easywine.domain.model.Wine
 import com.apptive.easywine.domain.repository.SurveyRepository
 import retrofit2.Response
 import javax.inject.Inject
@@ -19,6 +21,10 @@ class SurveyRepositoryImpl @Inject constructor(
 
 	override suspend fun getQuestion3(): Response<List<Question>> {
 		return api.getQuestion3()
+	}
+
+	override suspend fun getRecommend(recommendBody: RecommendBody): Response<Wine> {
+		return api.getRecommend(recommendBody)
 	}
 
 }
