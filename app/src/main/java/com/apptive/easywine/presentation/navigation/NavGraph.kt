@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import com.apptive.easywine.presentation.Home.HomeScreen
 import com.apptive.easywine.presentation.Home.WineStorage
 import com.apptive.easywine.presentation.Login.LoginScreen
+import com.apptive.easywine.presentation.SplashScreen
 import com.apptive.easywine.presentation.Survey.SurveyScreen
 
 fun NavGraphBuilder.easyWineGraph(
@@ -14,7 +15,7 @@ fun NavGraphBuilder.easyWineGraph(
 	upPress: () -> Unit = {}
 ) {
 	composable(Screen.SplashScreen.route) {
-		// Splash Screen
+		SplashScreen(navController = navController)
 	}
 
 	composable(Screen.LoginScreen.route) {

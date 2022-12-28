@@ -11,11 +11,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.apptive.easywine.R
+import com.apptive.easywine._const.NetworkConst.IMAGE_URL
 import com.apptive.easywine.presentation.components.ResultButton
 import com.apptive.easywine.ui.theme.wine_button
 
@@ -35,18 +40,26 @@ fun SurveyResultContent(
 				modifier = Modifier
 					.background(Color.White)
 			) {
-				WinePageNav(isLeft = true)
+
+//				WinePageNav(isLeft = true)
 				Spacer(Modifier.size(80.dp))
-				Image(
-					painterResource(id = R.drawable.wine_img),
+
+				AsyncImage(
+					model = ImageRequest.Builder(LocalContext.current)
+						.data(IMAGE_URL + "${viewModel.recommendedWine.id}")
+						.crossfade(true)
+						.build(),
+					contentDescription = "wine image",
+					placeholder = painterResource(id = R.drawable.wine_img),
+					contentScale = ContentScale.Crop,
 					modifier = Modifier
 						.width(50.dp)
 						.background(Color.White)
 						.height(200.dp),
-					contentDescription = "wine image"
 				)
+
 				Spacer(Modifier.size(80.dp))
-				WinePageNav(isLeft = false)
+//				WinePageNav(isLeft = false)
 			}
 			Spacer(Modifier.size(20.dp))
 

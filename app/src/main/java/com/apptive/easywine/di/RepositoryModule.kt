@@ -6,6 +6,7 @@ import com.apptive.easywine.data.remote.WineStorageApi
 import com.apptive.easywine.data.repository.MemberRepositoryImpl
 import com.apptive.easywine.data.repository.SurveyRepositoryImpl
 import com.apptive.easywine.data.repository.WineStorageRepositoryImpl
+import com.apptive.easywine.data.storage.UserStore
 import com.apptive.easywine.domain.repository.MemberRepository
 import com.apptive.easywine.domain.repository.SurveyRepository
 import com.apptive.easywine.domain.repository.WineStorageRepository
@@ -14,7 +15,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -28,8 +28,8 @@ object RepositoryModule {
 
 	@Provides
 	@Singleton
-	fun provideMemberRepository(api: MemberApi): MemberRepository {
-		return MemberRepositoryImpl(api)
+	fun provideMemberRepository(api: MemberApi, store: UserStore): MemberRepository {
+		return MemberRepositoryImpl(store, api)
 	}
 
 	@Provides
@@ -37,5 +37,4 @@ object RepositoryModule {
 	fun provideWineStorageRepository(api: WineStorageApi): WineStorageRepository {
 		return WineStorageRepositoryImpl(api)
 	}
-
 }

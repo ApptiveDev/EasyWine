@@ -19,6 +19,10 @@ class WineStorageRepositoryImpl @Inject constructor(
 		return api.getWineList()
 	}
 
+	override suspend fun getLikedWineList(): Response<List<StorageWine>> {
+		return api.getLikedWineList()
+	}
+
 	override suspend fun setLikedWine(wineLiked: WineLiked): Response<WineLiked> {
 		return api.setLikedWine(wineLiked)
 	}

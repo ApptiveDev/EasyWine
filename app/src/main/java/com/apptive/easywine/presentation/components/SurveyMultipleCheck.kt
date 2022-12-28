@@ -45,7 +45,7 @@ fun SurveyMultipleCheck(
 						if(checkedButtonIdx == idx) checkedButtonIdx = -1
 						else {
 							checkedButtonIdx = idx
-							onClick(idx)
+							onClick(idx+1)
 						}
 					},
 					text = it,

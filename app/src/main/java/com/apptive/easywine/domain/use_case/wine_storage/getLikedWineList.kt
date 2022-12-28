@@ -1,9 +1,12 @@
-package com.apptive.easywine.domain.use_case.member
+package com.apptive.easywine.domain.use_case.wine_storage
 
 import android.util.Log
-import com.apptive.easywine.domain.model.EmailPassword
-import com.apptive.easywine.domain.model.LoginInfo
-import com.apptive.easywine.domain.repository.MemberRepository
+import com.apptive.easywine.domain.model.Question
+import com.apptive.easywine.domain.model.RecommendBody
+import com.apptive.easywine.domain.model.StorageWine
+import com.apptive.easywine.domain.model.Wine
+import com.apptive.easywine.domain.repository.SurveyRepository
+import com.apptive.easywine.domain.repository.WineStorageRepository
 import com.apptive.easywine.domain.util.Resource
 import com.apptive.easywine.domain.util.log
 import kotlinx.coroutines.flow.Flow
@@ -13,21 +16,19 @@ import java.io.IOException
 import javax.inject.Inject
 
 
-class doLogin @Inject constructor(
-    val repository: MemberRepository
+class getLikedWineList @Inject constructor(
+    val repository: WineStorageRepository
 ){
-    operator fun invoke(emailPassword: EmailPassword): Flow<Resource<LoginInfo>> = flow {
+    operator fun invoke(): Flow<Resource<List<StorageWine>>> = flow {
         try {
             emit(Resource.Loading())
-            val r = repository.doLogin(emailPassword)
+            val r = repository.getLikedWineList()
 
             when(r.code()) {
-                200 -> {
-                    emit(Resource.Success(r.body()!!))
-                    repository.setUserToken(r.body()!!.token)
-                }
+                200 -> emit(Resource.Success(r.body()!!))
                 else -> Log.d("use case", r.errorBody().toString())
             }
+
         } catch(e: HttpException) {
             "An unexpected error occured".log("use case")
             emit(Resource.Error(e.localizedMessage ?: "An unexpected error occured"))

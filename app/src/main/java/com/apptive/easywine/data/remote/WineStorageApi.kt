@@ -16,8 +16,11 @@ interface WineStorageApi {
 		@Path("id") id: Int
 	) : Response<Wine>
 
-	@GET("/getContainers/v1")
+	@GET("/container/getContainers/v1")
 	suspend fun getWineList() : Response<List<StorageWine>>
+
+	@GET("/container/getLikedContainers/v1")
+	suspend fun getLikedWineList() : Response<List<StorageWine>>
 
 	@POST("/container/modifyContainer/v1")
 	suspend fun setLikedWine(

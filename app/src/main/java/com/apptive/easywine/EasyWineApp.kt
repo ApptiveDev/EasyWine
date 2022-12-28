@@ -41,17 +41,13 @@ fun EasyWineApp() {
 
             NavHost(
                 navController = navController,
-                startDestination = Screen.LoginScreen.route,
+                startDestination = Screen.SplashScreen.route,
             ) {
                 easyWineGraph(
                     navController = navController,
                     onClickDrawer = {
                         scope.launch {
                             scaffoldState.drawerState.open()
-                            Log.d(
-                                "test",
-                                "${navController.currentBackStackEntry?.destination?.route}"
-                            )
                         }
                     },
                     upPress = {navController.navigateUp()}

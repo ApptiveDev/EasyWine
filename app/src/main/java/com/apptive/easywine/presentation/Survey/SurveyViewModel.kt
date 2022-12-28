@@ -28,7 +28,8 @@ import javax.inject.Inject
 class SurveyViewModel @Inject constructor(
 	private val getQuestionUseCase: GetQuestions,
 	private val getRecommend: GetRecommend,
-	private val setWineLikedUseCase: setLikedWine
+	private val setWineLikedUseCase: setLikedWine,
+
 ) : ViewModel() {
 
 	var questions1 by mutableStateOf(emptyList<Question>())
@@ -142,7 +143,7 @@ class SurveyViewModel @Inject constructor(
 
 	fun setWineLiked(liked : Boolean) {
 		viewModelScope.launch {
-			setWineLikedUseCase(wineLiked = WineLiked(recommendedWine.id, liked)).collect() { result ->
+			setWineLikedUseCase(wineLiked = WineLiked(recommendedWine.id, !liked)).collect() { result ->
 				when (result) {
 					is Resource.Success -> {
 						recommendedWine._like = liked
