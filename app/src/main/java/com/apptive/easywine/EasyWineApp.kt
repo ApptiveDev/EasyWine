@@ -1,14 +1,12 @@
 package com.apptive
 
-import androidx.compose.material.Scaffold
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.apptive.easywine.domain.util.RtlDrawerScaffold
+import com.apptive.easywine.domain.util.rememberScaffoldState
 import com.apptive.easywine.presentation.components.NavigationDrawer
 import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.presentation.navgation.easyWineGraph
@@ -22,7 +20,7 @@ fun EasyWineApp() {
 	val scope = rememberCoroutineScope()
 
 	EasyWineTheme {
-			Scaffold(
+			RtlDrawerScaffold(
 				scaffoldState = scaffoldState,
 				bottomBar = {},
 				drawerContent = {
