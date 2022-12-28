@@ -87,11 +87,6 @@ class LoginViewModel @Inject constructor(
 					age = event.value
 				)
 			}
-			is LoginEvent.EnteredGender -> {
-				userInfo = userInfo.copy(
-					gender = 0 // TODO - fix
-				)
-			}
 			is LoginEvent.EnteredName -> {
 				userInfo = userInfo.copy(
 					name = event.value
@@ -133,6 +128,9 @@ class LoginViewModel @Inject constructor(
 						_eventFlow.emit(UiEvent.Error(message = "계정생성 중 에러 발생"))
 					}
 				}
+			}
+			is LoginEvent.EnterGender -> {
+				userInfo = userInfo.copy(gender = if(event.value) 1 else 0)
 			}
 		}
 
