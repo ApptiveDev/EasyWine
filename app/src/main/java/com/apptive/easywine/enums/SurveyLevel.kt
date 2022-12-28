@@ -4,10 +4,11 @@ enum class SurveyLevel (
 	val number: Int,
 	val korText: String,
 	val engText: String,
+	val percent: Float,
 ){
-	FLAVOR(1, "맛", "flavor"),
-	MOOD(2, "상황", "mood"),
-	ETC(3, "기타", "etc");
+	FLAVOR(1, "맛", "flavor", 0.2F),
+	MOOD(2, "상황", "mood", 0.5F),
+	ETC(3, "기타", "etc", 0.8F);
 
 	fun increaseLevel(): SurveyLevel {
 		return when(this) {

@@ -135,7 +135,6 @@ class LoginViewModel @Inject constructor(
 				}
 			}
 		}
-
 	}
 
 	sealed class UiEvent {

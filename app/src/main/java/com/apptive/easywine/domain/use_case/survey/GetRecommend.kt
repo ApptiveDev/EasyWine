@@ -3,6 +3,7 @@ package com.apptive.easywine.domain.use_case.survey
 import android.util.Log
 import com.apptive.easywine.domain.model.Question
 import com.apptive.easywine.domain.model.RecommendBody
+import com.apptive.easywine.domain.model.StorageWine
 import com.apptive.easywine.domain.model.Wine
 import com.apptive.easywine.domain.repository.SurveyRepository
 import com.apptive.easywine.domain.util.Resource
@@ -17,7 +18,7 @@ import javax.inject.Inject
 class GetRecommend @Inject constructor(
     val repository: SurveyRepository
 ){
-    operator fun invoke(recommendBody: RecommendBody): Flow<Resource<Wine>> = flow {
+    operator fun invoke(recommendBody: RecommendBody): Flow<Resource<StorageWine>> = flow {
         try {
             emit(Resource.Loading())
             val r = repository.getRecommend(recommendBody)

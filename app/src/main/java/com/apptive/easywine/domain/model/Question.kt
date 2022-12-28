@@ -5,5 +5,6 @@ data class Question(
 	var category: Int = 0,
 	var answerFormat: Int = 0,
 	var context: String = "",
-	var question_option : List<String> = emptyList()
+	var question_option : List<String> = emptyList(),
+	var scaleList : List<String> = emptyList()
 )
