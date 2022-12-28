@@ -25,9 +25,9 @@ import com.apptive.easywine.ui.theme.gray_button_before
 fun StorageWineList(
     wine_id: Int,
     winename: String,
-    wine_info: String,
+    variety: String,
     country: String,
-    country_id: Int,
+    countryFlag: Int,
     onClick: () -> Unit = {}
 ){
     Box(
@@ -60,18 +60,18 @@ fun StorageWineList(
                 )
                 Spacer(modifier = Modifier.height(3.dp))
                 Text(
-                    text = wine_info,
+                    text = variety,
                     fontSize = 13.sp,
                     color = gray_button_before
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 Row(){
                     Image(
-                        painterResource(id = country_id),
+                        painterResource(id = countryFlag),
                         modifier = Modifier
                             .width(25.dp)
                             .height(17.dp),
-                        contentDescription = "country_id"
+                        contentDescription = "countryFlag"
                     )
                     Spacer(modifier = Modifier.width(2.dp))
                     Text(
