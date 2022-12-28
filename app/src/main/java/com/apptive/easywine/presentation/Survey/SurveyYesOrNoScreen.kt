@@ -10,18 +10,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.apptive.easywine.domain.model.Question
 import com.apptive.easywine.enums.SurveyLevel
 import com.apptive.easywine.presentation.components.*
+import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.ui.theme.gray_button_before
 import com.apptive.easywine.ui.theme.wine_button
 
 @Composable
 fun SurveyYesOrNoScreen(
-    percent: Float,
-    level: SurveyLevel,
-    title_front: String,
-    condition: String,
-    title_back: String
+    navController: NavController = rememberNavController(),
+    surveyViewModel: SurveyViewModel = hiltViewModel(),
+    onClickDrawer: () -> Unit = {},
 ){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -29,18 +32,30 @@ fun SurveyYesOrNoScreen(
             .verticalScroll(rememberScrollState())
             .background(Color.White)
     ){
-        SnackTopBar(title = "오늘의 와인 추천", fontSize = 18)
-        SurveyTopbar(percent, level)
-        Spacer(modifier = Modifier.height(30.dp))
-        SurveyTitle(title_front, condition, title_back)
-        SurveyYesOrNo("Q1. 집에서 간단하게 마실 수 있는 와인을 원해요.")
-        SurveyYesOrNo("Q2. 집에서 간단하게 마실 수 있는 와인을 원해요.")
-        SurveyYesOrNo("Q3. 집에서 간단하게 마실 수 있는 와인을 원해요.")
-        SurveyYesOrNo("Q4. 집에서 간단하게 마실 수 있는 와인을 원해요.")
-        SurveyYesOrNo("Q5. 집에서 간단하게 마실 수 있는 와인을 원해요.")
+        SnackTopBar(title = "오늘의 와인 추천", fontSize = 18, onClickDrawer = onClickDrawer)
+        SurveyYesOrNoMainContent(
+            0.7F,
+            SurveyLevel.MOOD,
+            "오늘의 와인을 위한 ",
+            "상황 ",
+            "질문이에요.",
+            surveyViewModel.questions2,
+        )
         SurveyYesOrNoBottomButton()
 
     }
+}
+
+@Composable
+fun SurveyYesOrNoMainContent(
+    percent: Float,
+    level: SurveyLevel,
+    title_front: String,
+    condition: String,
+    title_back: String,
+    question2: List<Question>,
+    navController: NavController = rememberNavController(),
+) {
 }
 
 @Composable
@@ -67,5 +82,5 @@ fun SurveyYesOrNoBottomButton(){
 @Preview
 @Composable
 fun PreviewSurveyYesOrNoScreen() {
-    SurveyYesOrNoScreen(0.7F, SurveyLevel.MOOD,"오늘의 와인을 위한 ", "상황 ", "질문이에요.")
+    SurveyYesOrNoScreen()
 }
