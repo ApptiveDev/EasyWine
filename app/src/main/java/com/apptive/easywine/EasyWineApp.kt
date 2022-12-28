@@ -53,7 +53,8 @@ fun EasyWineApp() {
                                 "${navController.currentBackStackEntry?.destination?.route}"
                             )
                         }
-                    }
+                    },
+                    upPress = {navController.navigateUp()}
                 )
             }
             it

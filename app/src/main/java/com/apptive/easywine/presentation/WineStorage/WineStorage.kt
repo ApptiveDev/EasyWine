@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.apptive.easywine.R
 import com.apptive.easywine.presentation.Survey.SurveyResultContent
 import com.apptive.easywine.presentation.components.SnackTopBar
@@ -30,7 +32,8 @@ import kotlinx.coroutines.CoroutineScope
 fun WineStorage(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     onClickDrawer: () -> Unit = {},
-    scope: CoroutineScope = rememberCoroutineScope()
+    scope: CoroutineScope = rememberCoroutineScope(),
+    upPress: () -> Unit = {},
 ){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -39,7 +42,7 @@ fun WineStorage(
             .background(storage_background)
             .verticalScroll(rememberScrollState())
     ){
-        SnackTopBar(title = "와인창고",18, onClickDrawer = onClickDrawer)
+        SnackTopBar(title = "와인창고",18, onClickDrawer = onClickDrawer, upPress = upPress)
         StorageButtonContent()
         StorageDate("11/01")
         Spacer(Modifier.height(20.dp))
