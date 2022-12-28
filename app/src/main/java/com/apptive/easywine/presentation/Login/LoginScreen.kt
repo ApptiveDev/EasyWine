@@ -74,12 +74,19 @@ fun LoginScreen(
 			.verticalScroll(rememberScrollState())
 	) {
 		LogoTopBar(title = "EASY WINE", fontSize = 24, color = wine_button)
-
-		//Spacer(modifier = Modifier.height(38.dp))
-		//ImageAdd()
-		Spacer(modifier = Modifier.height(80.dp))
+		Spacer(modifier = Modifier.height(27.dp))
+		Image(
+			modifier = Modifier
+				.size(98.dp, 96.dp)
+				.clickable { },
+			painter = painterResource(id = R.drawable.easywine_logo),
+			contentDescription = null
+		)
+		Spacer(modifier = Modifier.height(57.dp))
 
 		BasicInfoBox(
+			width = 305.dp,
+			height = 50.dp,
 			type = "Email",
 			text = viewModel.userInfo.email,
 			onValueChange = { viewModel.onEvent(LoginEvent.EnteredEmail(it)) },
@@ -107,18 +114,25 @@ fun LoginScreen(
 
 		if (isSignUpMode) {
 			BasicInfoBox(
+				width = 305.dp,
+				height = 50.dp,
 				type = "Name",
 				text = viewModel.userInfo.name,
 				onValueChange = { viewModel.onEvent(LoginEvent.EnteredName(it)) },
 			)
 			Spacer(modifier = Modifier.height(30.dp))
-
-			BasicInfoBox(
-				type = "Age",
-				text = viewModel.userInfo.age.toString(),
-				onValueChange = { viewModel.onEvent(LoginEvent.EnteredAge(it.toIntOrNull() ?: 0)) },
-				keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-			)
+			Row {
+				GenderBox() { viewModel.onEvent(LoginEvent.EnterGender(it)) }
+				Spacer(modifier = Modifier.width(18.dp))
+				BasicInfoBox(
+					width = 118.dp,
+					height = 50.dp,
+					type = "Age",
+					text = viewModel.userInfo.age.toString(),
+					onValueChange = { viewModel.onEvent(LoginEvent.EnteredAge(it.toIntOrNull() ?: 0)) },
+					keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+				)
+			}
 			Spacer(modifier = Modifier.height(30.dp))
 		}
 
@@ -138,8 +152,12 @@ fun LoginScreen(
 
 		Spacer(modifier = Modifier.height(30.dp))
 
-		Row() {
-			Surface(modifier = Modifier.padding(3.dp)) {
+		Row(
+			verticalAlignment = Alignment.CenterVertically
+		) {
+			Surface(
+				modifier = Modifier.padding(3.dp)
+			) {
 				Text(
 					text =
 					if (isSignUpMode) "Already have an account?"
@@ -164,41 +182,8 @@ fun LoginScreen(
 	}
 }
 
-@Composable
-fun ImageAdd() {
-	Box(
-		modifier = Modifier
-			.clip(RoundedCornerShape(50))
-			.width(107.dp)
-			.height(107.dp)
-			.clickable { }) {
-		Image(
-			modifier = Modifier
-				.size(107.dp, 107.dp)
-				.clickable { },
-			painter = painterResource(id = R.drawable.image_add_circle),
-			contentDescription = null
-		)
-	}
-}
-
 @Preview
 @Composable
 fun PreviewSurveyQuestion() {
 	LoginScreen()
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

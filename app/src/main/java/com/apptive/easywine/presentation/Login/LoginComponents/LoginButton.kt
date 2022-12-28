@@ -39,7 +39,7 @@ fun LoginButton(
         onClick = onClick,
         modifier = modifier
             .width(305.dp)
-            .height(47.dp)
+            .height(50.dp)
             .clip(RoundedCornerShape(15))
             .background(color = color)
     ) {
