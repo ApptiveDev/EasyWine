@@ -15,5 +15,7 @@ enum class StorageWineInfo (
     NewZealand("뉴질랜드", R.drawable.new_zealand),
     Chile("칠레", R.drawable.chile),
     Argentina("아르헨티나", R.drawable.argentina),
-    Germany("독일", R.drawable.germany)
+    Germany("독일", R.drawable.germany),
+    Japan("일본",R.drawable.japan),
+    Portugal("포르투갈", R.drawable.portugal)
 }
