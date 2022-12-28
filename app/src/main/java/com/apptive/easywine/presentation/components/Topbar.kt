@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.apptive.easywine.ui.theme.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -90,6 +91,7 @@ fun SnackTopBar(
 	fontSize: Int,
 	color: Color = gray_button,
 	onClickDrawer: () -> Unit = {},
+	upPress: () -> Unit = {}
 ){
 	TopBar{
 		Column(
@@ -105,7 +107,7 @@ fun SnackTopBar(
 					.fillMaxHeight()
 			) {
 				IconButton(
-					onClick = { /*TODO*/ },
+					onClick = upPress,
 					modifier = Modifier
 						.align(Alignment.TopStart)
 						.padding(start = 20.dp)

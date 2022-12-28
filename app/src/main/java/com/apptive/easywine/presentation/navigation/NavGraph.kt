@@ -28,14 +28,14 @@ fun NavGraphBuilder.easyWineGraph(
 	}
 
 	composable(Screen.SurveyScreen.route) {
-		SurveyScreen(navController = navController, onClickDrawer = onClickDrawer)
+		SurveyScreen(upPress = upPress, navController = navController, onClickDrawer = onClickDrawer)
 	}
 
 	composable(Screen.SurveyYesOrNoScreen.route) {
-		SurveyYesOrNoScreen(navController)
+		SurveyYesOrNoScreen(upPress = upPress)
 	}
 
 	composable(Screen.StorageScreen.route) {
-		WineStorage(navController)
+		WineStorage(onClickDrawer = onClickDrawer, upPress = upPress)
 	}
 }
