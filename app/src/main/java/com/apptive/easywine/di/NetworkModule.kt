@@ -1,5 +1,6 @@
 package com.apptive.easywine.di
 
+import android.content.Context
 import android.util.Log
 import com.apptive.easywine._const.NetworkConst.BASE_URL
 import com.apptive.easywine.data.remote.MemberApi
@@ -12,7 +13,9 @@ import com.apptive.easywine.domain.repository.SurveyRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -24,7 +27,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-	/* TODO - JWT TOKEN 인증을 위한 AuthInterceptor. 추후 TOKEN 추가
+	/* TODO - JWT TOKEN 인증을 위한 AuthInterceptor. 추후 TOKEN 추가 */
 	@Provides
 	@Singleton
 	fun provideAuthInterceptor(
@@ -34,13 +37,13 @@ object NetworkModule {
 			.request()
 			.newBuilder()
 			.addHeader(
-				"Authorization",
-				"Bearer {token}"
+				"X-AUTH-TOKEN",
+				"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE2NzIyMzYyNjksImV4cCI6MTY3MjIzOTg2OX0.iqXNzwcjLCt5uWTRIP0tExL9PSA-BMoit5d9HNvjCLg"
 			)
 			.build()
 		return@Interceptor chain.proceed(newRequest)
 	}
-	*/
+
 
 	// rest api 통신 logger
 	@Singleton

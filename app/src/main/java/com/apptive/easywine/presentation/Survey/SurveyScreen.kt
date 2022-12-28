@@ -8,7 +8,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,36 +23,20 @@ import com.apptive.easywine.domain.model.Question
 import com.apptive.easywine.domain.util.log
 import com.apptive.easywine.enums.SurveyLevel
 import com.apptive.easywine.presentation.components.*
+import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.ui.theme.gray_button_before
 import com.apptive.easywine.ui.theme.wine_button
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun SurveyScreen(
 	navController: NavController = rememberNavController(),
 	upPress: () -> Unit = {},
-	surveyViewModel: SurveyViewModel = hiltViewModel(),
 	onClickDrawer: () -> Unit = {},
-	scope: CoroutineScope = rememberCoroutineScope()
-) {
-	Column(
-		horizontalAlignment = Alignment.CenterHorizontally,
-		modifier = Modifier
-			.background(Color.White)
-	) {
-		SnackTopBar(title = "오늘의 와인 추천", fontSize = 18, onClickDrawer = onClickDrawer, upPress = upPress)
-
-		SurveyMainContent(onClickSubmit = {navController.navigate("")})
-	}
-}
-
-@Composable
-fun SurveyMainContent(
-	onClickSubmit :() -> Unit =  {},
 	surveyViewModel: SurveyViewModel = hiltViewModel(),
 ) {
 	val current = LocalContext.current
+	val isSummited = remember { mutableStateOf(false) }
 
 	LaunchedEffect(key1 = true) {
 		surveyViewModel.eventFlow.collectLatest { event ->
@@ -60,14 +45,33 @@ fun SurveyMainContent(
 					Toast.makeText(current, event.message, Toast.LENGTH_SHORT).show()
 				}
 				is UiEvent.Submit -> {
-					"LOGIN SUCCESS!!".log()
+					"SUBMIT SUCCESS!!".log()
 					Toast.makeText(current, "제출 성공!", Toast.LENGTH_SHORT).show()
-					onClickSubmit()
+					isSummited.value = true
 				}
 			}
 		}
 	}
 
+	Column(
+		horizontalAlignment = Alignment.CenterHorizontally,
+		modifier = Modifier
+			.background(Color.White)
+	) {
+		SnackTopBar(title = "오늘의 와인 추천", fontSize = 18, onClickDrawer = onClickDrawer, upPress = upPress)
+
+		if(isSummited.value) SurveyResultContent(surveyViewModel) {
+			navController.navigate(Screen.HomeScreen.route) { popUpTo(0) }
+		}
+		else SurveyMainContent(surveyViewModel)
+	}
+}
+
+@Composable
+fun SurveyMainContent(
+	surveyViewModel: SurveyViewModel,
+) {
+	val current = LocalContext.current
 	Column() {
 		LazyColumn(
 			horizontalAlignment = Alignment.CenterHorizontally
