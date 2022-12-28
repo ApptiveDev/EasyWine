@@ -15,8 +15,9 @@ enum class StorageWineInfo (
     NewZealand("뉴질랜드", R.drawable.new_zealand),
     Chile("칠레", R.drawable.chile),
     Argentina("아르헨티나", R.drawable.argentina),
+    Japan("일본",R.drawable.japan),
+    Portugal("포르투갈", R.drawable.portugal),
     Germany("독일", R.drawable.germany);
-
     companion object {
         private val map = StorageWineInfo.values().associateBy(StorageWineInfo::country)
         fun fromCountryName(name: String) = map[name]
