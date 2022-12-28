@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,7 +18,6 @@ import androidx.compose.ui.unit.sp
 import com.apptive.easywine.R
 import com.apptive.easywine.ui.theme.gray_button_before
 import com.apptive.easywine.ui.theme.wine_button
-import androidx.compose.ui.graphics.Color as Color
 
 
 @Composable
@@ -61,11 +61,11 @@ fun ResultButton(
 
 @Composable
 fun PageNav(
-	nextSurveyClick: () -> Unit = {},
+	onClick: () -> Unit,
 	isLeft: Boolean = true
 ) {
 	Button(
-		onClick = nextSurveyClick,
+		onClick = onClick,
 		colors = ButtonDefaults.buttonColors(
 			backgroundColor = Color.Transparent
 		),
@@ -101,19 +101,19 @@ fun PageNavText(
 	)
 }
 
-@Preview
-@Composable
-fun PreviewResultButton() {
-	Column {
-		ResultButton(
-			text = "오늘의 와인 확인하기",
-			color = gray_button_before
-		)
-		ResultButton(
-			text = "오늘의 와인 확인하기",
-			color = wine_button
-		)
-		PageNav(isLeft = true)
-		PageNav(isLeft = false)
-	}
-}
+//@Preview
+//@Composable
+//fun PreviewResultButton() {
+//	Column {
+//		ResultButton(
+//			text = "오늘의 와인 확인하기",
+//			color = gray_button_before
+//		)
+//		ResultButton(
+//			text = "오늘의 와인 확인하기",
+//			color = wine_button
+//		)
+//		PageNav(isLeft = true)
+//		PageNav(isLeft = false)
+//	}
+//}

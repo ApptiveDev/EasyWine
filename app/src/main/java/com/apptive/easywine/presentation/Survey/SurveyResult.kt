@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.apptive.easywine.R
@@ -26,9 +27,7 @@ import kotlinx.coroutines.CoroutineScope
 @Preview
 @Composable
 fun SurveyResult(
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
     onClickDrawer: () -> Unit = {},
-    scope: CoroutineScope = rememberCoroutineScope(),
     upPress: () -> Unit = {},
 ){
     Column(
@@ -45,7 +44,9 @@ fun SurveyResult(
 }
 
 @Composable
-fun SurveyResultContent(){
+fun SurveyResultContent(
+    viewModel: SurveyResultViewModel = hiltViewModel(),
+){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
