@@ -22,7 +22,7 @@ import com.apptive.easywine.ui.theme.wine_button
 
 @Composable
 fun SurveyYesOrNoScreen(
-    navController: NavController = rememberNavController(),
+    upPress: () -> Unit = {},
     surveyViewModel: SurveyViewModel = hiltViewModel(),
     onClickDrawer: () -> Unit = {},
 ){
@@ -32,7 +32,7 @@ fun SurveyYesOrNoScreen(
             .verticalScroll(rememberScrollState())
             .background(Color.White)
     ){
-        SnackTopBar(title = "오늘의 와인 추천", fontSize = 18, onClickDrawer = onClickDrawer)
+        SnackTopBar(title = "오늘의 와인 추천", fontSize = 18, onClickDrawer = onClickDrawer, upPress = upPress)
         SurveyYesOrNoMainContent(
             0.7F,
             SurveyLevel.MOOD,

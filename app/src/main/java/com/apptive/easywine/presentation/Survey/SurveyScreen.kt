@@ -30,6 +30,7 @@ import kotlinx.coroutines.CoroutineScope
 @Composable
 fun SurveyScreen(
 	navController: NavController = rememberNavController(),
+	upPress: () -> Unit = {},
 	surveyViewModel: SurveyViewModel = hiltViewModel(),
 	onClickDrawer: () -> Unit = {},
 	scope: CoroutineScope = rememberCoroutineScope()
@@ -39,7 +40,7 @@ fun SurveyScreen(
 		modifier = Modifier
 			.background(Color.White)
 	) {
-		SnackTopBar(title = "오늘의 와인 추천", fontSize = 18, onClickDrawer = onClickDrawer)
+		SnackTopBar(title = "오늘의 와인 추천", fontSize = 18, onClickDrawer = onClickDrawer, upPress = upPress)
 
 		/* just for test 
 		Button(

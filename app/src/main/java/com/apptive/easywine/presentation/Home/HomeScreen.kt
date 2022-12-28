@@ -36,7 +36,6 @@ fun HomeScreen(
     onClickDrawer: () -> Unit = {},
     scrollState: ScrollState = rememberScrollState(),
     scope: CoroutineScope = rememberCoroutineScope()
-
 ) {
 
 //    val scrollState = rememberScrollState()

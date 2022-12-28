@@ -33,7 +33,8 @@ fun WineStorage(
     navController: NavController = rememberNavController(),
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     onClickDrawer: () -> Unit = {},
-    scope: CoroutineScope = rememberCoroutineScope()
+    scope: CoroutineScope = rememberCoroutineScope(),
+    upPress: () -> Unit = {},
 ){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -42,7 +43,7 @@ fun WineStorage(
             .background(storage_background)
             .verticalScroll(rememberScrollState())
     ){
-        SnackTopBar(title = "와인창고",18, onClickDrawer = onClickDrawer)
+        SnackTopBar(title = "와인창고",18, onClickDrawer = onClickDrawer, upPress = upPress)
         StorageButtonContent()
         StorageDate("11/01")
         Spacer(Modifier.height(20.dp))

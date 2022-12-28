@@ -1,5 +1,6 @@
 package com.apptive.easywine.presentation.components
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -13,19 +14,33 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.ui.theme.*
 
 
 @Composable
 fun NavigationDrawer(
-//    navController: NavController,
-    currentScreen: Screen,
+    currentScreen: String,
     itemClick: (String) -> Unit
 ) {
-    val menuList = createDrawerItem(currentScreen)
+
+    val menuList = listOf(
+        NavigationDrawerItem(
+            isSelected = currentScreen == Screen.HomeScreen.route,
+            title = "홈",
+            route = Screen.HomeScreen.route
+        ),
+        NavigationDrawerItem(
+            isSelected = currentScreen == Screen.SurveyScreen.route,
+            title = "오늘의 와인 추천",
+            route = Screen.SurveyScreen.route
+        ),
+        NavigationDrawerItem(
+            isSelected = currentScreen == Screen.StorageScreen.route,
+            title = "나만의 와인 창고",
+            route = Screen.StorageScreen.route
+        ),
+    )
     
     LazyColumn(
         modifier = Modifier
@@ -35,49 +50,21 @@ fun NavigationDrawer(
         contentPadding = PaddingValues(vertical = 16.dp)
     ) {
         items(menuList) { item ->
-            DrawerBody(item, itemClick)
+            DrawerBody(item, {itemClick(item.route)})
         }
     }
 }
 
-@Composable
-private fun createDrawerItem(currentScreen: Screen) = listOf(
-    NavigationDrawerItem(
-        isSelected = currentScreen == Screen.HomeScreen,
-        title = "홈"
-    ),
-    NavigationDrawerItem(
-        isSelected = currentScreen == Screen.SurveyScreen,
-        title = "오늘의 와인 추천"
-    ),
-    NavigationDrawerItem(
-        isSelected = currentScreen == Screen.StorageScreen,
-        title = "나만의 와인 창고"
-    ),
-)
-
 data class NavigationDrawerItem(
     val isSelected: Boolean,
-    val title: String
+    val title: String,
+    val route: String,
 )
 
 @Composable
 private fun DrawerBody(
-//    navController: NavController = rememberNavController(),
     item: NavigationDrawerItem,
-    itemClick: (String) -> Unit,
-) {
-    NavigationMenuItem(item = item) {
-        itemClick(item.title)
-//        var goto = item.title
-//        navController.navigate(Screen.goto.route)
-    }
-}
-
-@Composable
-fun NavigationMenuItem(
-    item: NavigationDrawerItem,
-    itemClick: () -> Unit
+    itemClick: () -> Unit,
 ) {
     val texColor = if (item.isSelected) Color.White else gray_button_before
     val backgroundColor = if (item.isSelected) gray_button_before else Color.Transparent
