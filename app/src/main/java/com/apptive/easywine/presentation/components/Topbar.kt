@@ -3,10 +3,7 @@ package com.apptive.easywine.presentation.components
 import android.graphics.Paint.Align
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
@@ -19,6 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.apptive.easywine.ui.theme.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -39,7 +38,9 @@ fun TopBar(
 fun TextTopBar(
 	title: String,
 	fontSize: Int,
-	color: Color = gray_button
+	color: Color = gray_button,
+	scope: CoroutineScope,
+	onClickDrawer: () -> Unit = {},
 ) {
 	TopBar {
 		Column(
@@ -65,7 +66,7 @@ fun TextTopBar(
 						.padding(bottom = 6.dp)
 				)
 				IconButton(
-					onClick = { /*TODO*/ },
+					onClick = onClickDrawer,
 					modifier = Modifier
 						.align(Alignment.TopEnd)
 						.padding(end = 22.dp)
@@ -87,7 +88,8 @@ fun TextTopBar(
 fun SnackTopBar(
 	title: String,
 	fontSize: Int,
-	color: Color = gray_button
+	color: Color = gray_button,
+	onClickDrawer: () -> Unit = {},
 ){
 	TopBar{
 		Column(
@@ -127,7 +129,7 @@ fun SnackTopBar(
 						.padding(bottom = 6.dp)
 				)
 				IconButton(
-					onClick = { /*TODO*/ },
+					onClick = onClickDrawer,
 					modifier = Modifier
 						.align(Alignment.TopEnd)
 						.padding(end = 22.dp)
@@ -174,9 +176,9 @@ fun LogoTopBar(
 fun PreviewTopBar() {
 	Column {
 		TopBar()
-		TextTopBar(title = "오늘의 와인 추천", 18)
-		SnackTopBar(title = "오늘의 와인 추천", 18)
-		LogoTopBar(title = "EASY WINE", fontSize = 24, color = wine_button)
+//		TextTopBar(title = "오늘의 와인 추천", 18)
+//		SnackTopBar(title = "오늘의 와인 추천", 18)
+//		LogoTopBar(title = "EASY WINE", fontSize = 24, color = wine_button)
 	}
 
 }

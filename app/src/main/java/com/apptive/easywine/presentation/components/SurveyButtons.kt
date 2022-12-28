@@ -61,11 +61,11 @@ fun ResultButton(
 
 @Composable
 fun PageNav(
-	onClick: () -> Unit = {},
+	nextSurveyClick: () -> Unit = {},
 	isLeft: Boolean = true
 ) {
 	Button(
-		onClick = onClick,
+		onClick = nextSurveyClick,
 		colors = ButtonDefaults.buttonColors(
 			backgroundColor = Color.Transparent
 		),
@@ -73,6 +73,7 @@ fun PageNav(
 	) {
 		Row() {
 			if (!isLeft) PageNavText("다음으로 넘어가기")
+
 
 			Image(
 				painterResource(
