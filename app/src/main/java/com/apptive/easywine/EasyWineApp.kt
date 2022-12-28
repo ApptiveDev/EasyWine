@@ -1,8 +1,8 @@
 package com.apptive
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.apptive.easywine.domain.util.RtlDrawerScaffold
@@ -16,40 +16,47 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun EasyWineApp() {
-	val scaffoldState = rememberScaffoldState()
-	val scope = rememberCoroutineScope()
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    val navController = rememberNavController()
+    var current =  navController.currentBackStackEntry?.destination?.route
 
-	EasyWineTheme {
-			RtlDrawerScaffold(
-				scaffoldState = scaffoldState,
-				bottomBar = {},
-				drawerContent = {
+    EasyWineTheme {
+        RtlDrawerScaffold(
+            scaffoldState = scaffoldState,
+            bottomBar = {},
+            drawerContent = {
+                NavigationDrawer(
+                    currentScreen = current ?: Screen.HomeScreen.route,
+                ) {
+                    scope.launch {
+                        delay(timeMillis = 200)
+                        navController.navigate(it)
+                        scaffoldState.drawerState.close()
+                    }
 
-					NavigationDrawer(
-						currentScreen = Screen.HomeScreen
-					) {
-						scope.launch {
-							delay(timeMillis = 200)
-							scaffoldState.drawerState.close()
-						}
-					}
-				}
-			) {
-				var navController = rememberNavController()
-				NavHost(
-					navController = navController,
-					startDestination = Screen.LoginScreen.route,
-				) {
-					easyWineGraph(
-						navController = navController,
-						onClickDrawer = {
-							scope.launch {
-								scaffoldState.drawerState.open()
-							}
-						}
-					)
-				}
-				it
-			}
-	}
+                }
+            }
+        ) {
+
+            NavHost(
+                navController = navController,
+                startDestination = Screen.LoginScreen.route,
+            ) {
+                easyWineGraph(
+                    navController = navController,
+                    onClickDrawer = {
+                        scope.launch {
+                            scaffoldState.drawerState.open()
+                            Log.d(
+                                "test",
+                                "${navController.currentBackStackEntry?.destination?.route}"
+                            )
+                        }
+                    }
+                )
+            }
+            it
+        }
+    }
 }
