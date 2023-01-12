@@ -5,6 +5,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
 	primary = Purple200,
@@ -29,6 +32,21 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun EasyWineTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+
+	val sysUiController = rememberSystemUiController()
+
+	SideEffect {
+		if(darkTheme){
+			sysUiController.setSystemBarsColor(
+				color = Color.Transparent
+			)
+		}else{
+			sysUiController.setSystemBarsColor(
+				color = wine_main
+			)
+		}
+	}
+
 	val colors = if (darkTheme) {
 		DarkColorPalette
 	} else {
