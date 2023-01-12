@@ -1,5 +1,6 @@
 package com.apptive.easywine.presentation.Login
 
+import LoginButton
 import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -142,8 +143,6 @@ fun LoginScreen(
 		}
 
 		Spacer(modifier = Modifier.height(80.dp))
-
-		SocialLoginContent()
 
 		Spacer(modifier = Modifier.height(30.dp))
 

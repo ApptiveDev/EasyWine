@@ -17,10 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.apptive.easywine.R
-import com.apptive.easywine.data.repository.MemberRepositoryImpl
-import com.apptive.easywine.domain.use_case.member.checkLogined
-import com.apptive.easywine.domain.util.Resource
-import com.apptive.easywine.domain.util.log
 import com.apptive.easywine.presentation.navgation.Screen
 import com.apptive.easywine.ui.theme.wine_button
 import kotlinx.coroutines.delay
