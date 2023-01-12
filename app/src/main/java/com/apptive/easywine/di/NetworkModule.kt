@@ -32,7 +32,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-	/* TODO - JWT TOKEN 인증을 위한 AuthInterceptor. 추후 TOKEN 추가 */
 	@Provides
 	@Singleton
 	fun provideAuthInterceptor(
@@ -43,7 +42,7 @@ object NetworkModule {
 			.newBuilder()
 			.addHeader(
 				"X-AUTH-TOKEN",
-						"${runBlocking{appContext.dataStore.data.map {it[stringPreferencesKey("token")]}.first() }}"
+				"${runBlocking{appContext.dataStore.data.map {it[stringPreferencesKey("token")]}.first() }}"
 			)
 			.build()
 		return@Interceptor chain.proceed(newRequest)

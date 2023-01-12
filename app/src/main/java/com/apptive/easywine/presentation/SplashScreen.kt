@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.apptive.easywine.R
 import com.apptive.easywine.presentation.navgation.Screen
@@ -23,6 +24,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(
 	navController: NavController,
+	viewModel: SplashViewModel = hiltViewModel(),
 ) {
 	var startAnimation by remember { mutableStateOf(false) }
 	val alphaAnim = animateFloatAsState(
@@ -31,12 +33,19 @@ fun SplashScreen(
 	)
 
 	LaunchedEffect(key1 = true) {
+		var nextScreen = ""
+
+		if(viewModel.isLogined) nextScreen = Screen.HomeScreen.route
+		else nextScreen = Screen.LoginScreen.route
+
 		startAnimation = true
 
 		// 화면 전환
 		delay(1500L)
 		navController.popBackStack()
-		navController.navigate(Screen.LoginScreen.route)
+		navController.navigate(nextScreen) {
+			popUpTo(0)
+		}
 	}
 	Splash(alpha = alphaAnim.value)
 }

@@ -1,20 +1,16 @@
 package com.apptive.easywine.presentation.Login
 
-import android.widget.Space
+import LoginButton
 import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.runtime.*
-import com.apptive.easywine.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -25,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.apptive.easywine.R
 import com.apptive.easywine.domain.util.log
 import com.apptive.easywine.presentation.components.LogoTopBar
 import com.apptive.easywine.presentation.navgation.Screen
@@ -49,7 +46,6 @@ fun LoginScreen(
 				}
 				is LoginViewModel.UiEvent.Login -> {
 					"LOGIN SUCCESS!!".log()
-					Toast.makeText(context, "LOGIN SUCCESS!!", Toast.LENGTH_SHORT).show()
 					navController.navigate(Screen.HomeScreen.route) {
 						popUpTo(0)
 					}
@@ -147,8 +143,6 @@ fun LoginScreen(
 		}
 
 		Spacer(modifier = Modifier.height(80.dp))
-
-		SocialLoginContent()
 
 		Spacer(modifier = Modifier.height(30.dp))
 
