@@ -66,7 +66,6 @@ fun QuestionContainer(
 
 		Spacer(modifier = Modifier.width(3.dp))
 
-		// TODO 추후 IconButton
 		Icon(
 			painter = painterResource(id = R.drawable.circle_question),
 			contentDescription = "help icon",
