@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apptive.easywine.domain.model.EmailPassword
 import com.apptive.easywine.domain.model.UserInfo
+import com.apptive.easywine.domain.use_case.member.checkLogined
 import com.apptive.easywine.domain.use_case.member.createAccount
 import com.apptive.easywine.domain.use_case.member.doLogin
 import com.apptive.easywine.domain.util.Resource
@@ -24,12 +25,7 @@ class LoginViewModel @Inject constructor(
 	private val createAccountUseCase: createAccount,
 ): ViewModel() {
 
-	var userInfo: UserInfo by mutableStateOf(
-		UserInfo(
-			email = "test1",
-			pass = "1234",
-		)
-	)
+	var userInfo: UserInfo by mutableStateOf(UserInfo())
 		private set
 
 	private val _eventFlow = MutableSharedFlow<UiEvent>()
@@ -43,7 +39,7 @@ class LoginViewModel @Inject constructor(
 				}
 				is Resource.Error -> {
 					"로그인 중 에러 발생".log()
-					_eventFlow.emit(UiEvent.Error("cannot login"))
+					_eventFlow.emit(UiEvent.Error("로그인에 실패하였습니다"))
 				}
 				is Resource.Loading -> {
 					"토큰 값 가져오는 중...".log()
@@ -93,6 +89,7 @@ class LoginViewModel @Inject constructor(
 				)
 			}
 			is LoginEvent.Login -> {
+
 				viewModelScope.launch {
 					try {
 						if (userInfo.email.isBlank()

@@ -16,7 +16,7 @@ class UserStore @Inject constructor(@ApplicationContext context: Context) {
 	private val store = context.dataStore
 
 	suspend fun setToken(token: String) { store.edit { it[USER_TOKEN] = token } }
-	fun getToken(): Flow<String> { return store.data.map { it[USER_TOKEN]!! } }
+	fun getToken(): Flow<String> { return store.data.map { it[USER_TOKEN] ?: "token null" } }
 
 	companion object {
 		private val USER_TOKEN = stringPreferencesKey("token")
